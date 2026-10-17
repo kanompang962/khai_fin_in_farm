@@ -1,0 +1,436 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>พิมพ์เขียวฟาร์มไก่ไข่ 400 ตัว</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: blueprint drawing set — cover title block, then one sheet per drawing, each with its own sheet number strip. Deliberately single-look (blueprint blue). */
+:root{
+  --bp:#1E4F8A; --bp-deep:#153B68; --ln:#ECF4FF; --ln-soft:rgba(236,244,255,.66); --ln-faint:rgba(236,244,255,.2);
+  --grid:rgba(255,255,255,.05); --water:#8ED2FF; --feed:#FFD27A;
+  --f-disp:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+body{background:var(--bp-deep);color:var(--ln);font:15px/1.6 var(--f-body)}
+.wrap{max-width:1120px;margin:0 auto;padding-block:28px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:24px}
+.sheet{background-color:var(--bp);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;border:1px solid var(--ln-soft);outline:1px solid var(--ln-faint);outline-offset:-8px;
+  padding:20px;display:grid;gap:14px;min-width:0}
+h1,h2,h3{font-family:var(--f-disp);text-wrap:balance;margin:0;line-height:1.25}
+h1{font-size:clamp(26px,4.4vw,40px);font-weight:700;letter-spacing:.01em}
+.cover{display:grid;grid-template-columns:1.3fr 1fr;gap:24px}
+.cover>*{min-width:0}
+.cover .eyebrow{font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ln-soft)}
+.cover p{margin:8px 0 0;color:var(--ln-soft);max-width:60ch}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:16px 0 0;font-size:14px}
+.meta dt{color:var(--ln-soft)} .meta dd{margin:0;font-variant-numeric:tabular-nums}
+.index{border:1px solid var(--ln-soft);align-self:start}
+.index h3{font-size:13px;font-weight:600;letter-spacing:.08em;padding:8px 12px;border-bottom:1px solid var(--ln-soft)}
+.index ol{list-style:none;margin:0;padding:0}
+.index li a{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:6px 12px;color:var(--ln);text-decoration:none;border-bottom:1px solid var(--ln-faint)}
+.index li:last-child a{border-bottom:0}
+.index li a:hover,.index li a:focus-visible{background:rgba(255,255,255,.07);outline:none}
+.index .n{font-family:var(--f-mono);font-size:13px}
+.tb{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;border-bottom:1px solid var(--ln-soft);padding-bottom:12px}
+.tb .no{font:600 18px var(--f-mono);border:1.5px solid var(--ln);padding:3px 10px;letter-spacing:.04em}
+.tb h2{font-size:18px;font-weight:600}
+.tb p{margin:2px 0 0;font-size:13px;color:var(--ln-soft)}
+.tb .sc{font:12px/1.5 var(--f-mono);color:var(--ln-soft);text-align:right}
+.dwg{overflow-x:auto;min-width:0}
+.dwg svg{display:block;width:100%;height:auto;min-width:var(--mw,700px)}
+.pair{display:grid;grid-template-columns:1.55fr 1fr;gap:20px;align-items:start}
+.pair>*,.dgrid>*{min-width:0}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+figure{margin:0;display:grid;gap:6px}
+figcaption{font-size:13px;color:var(--ln-soft)}
+figcaption b{color:var(--ln);font-family:var(--f-disp);font-weight:600}
+.lg{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:13px}
+.lg li{display:inline-flex;align-items:center;gap:8px}
+.lg i{display:inline-block;width:22px;height:8px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--ln-faint);vertical-align:top}
+th{font:500 11.5px var(--f-mono);letter-spacing:.06em;color:var(--ln-soft);border-bottom:1px solid var(--ln-soft)}
+td.q{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.grp{font-family:var(--f-disp);font-weight:600;padding-top:14px}
+.tbl{overflow-x:auto}
+ol.notes{margin:0;padding-left:22px;display:grid;gap:6px}
+.disclaim{font-size:13px;color:var(--ln-soft);border-left:2px solid var(--feed);padding-left:12px;margin:0}
+@media (max-width:820px){.cover,.pair,.dgrid{grid-template-columns:1fr}}
+@media (max-width:560px){.tb{grid-template-columns:auto 1fr}.tb .sc{grid-column:1/-1;text-align:left}.sheet{padding:14px}}
+
+/* drawing styles */
+.dw *{fill:none;stroke:var(--ln);stroke-width:1.2}
+.dw text{fill:var(--ln);stroke:none;font:12px var(--f-body)}
+.dw .k{stroke-width:2.4} .dw .m{stroke-width:1.3} .dw .f{stroke-width:.8;opacity:.75}
+.dw .k2{stroke-width:1.8}
+.dw .h{stroke-width:1;stroke-dasharray:6 4;opacity:.8}
+.dw .c{stroke-width:.8;stroke-dasharray:16 4 3 4;opacity:.5}
+.dw .d{stroke-width:.7;opacity:.9} .dw .tk{stroke-width:1.5} .dw .ld{stroke-width:.7;opacity:.85}
+.dw .solid{fill:var(--ln);stroke:none}
+.dw .wall{fill:url(#pHatch);stroke-width:1}
+.dw .cutS{fill:url(#pHatch);stroke-width:1.5}
+.dw .mesh{fill:url(#pMesh);stroke:none}
+.dw .meshB{fill:url(#pMesh);stroke-width:1}
+.dw .meshL{stroke-width:1;stroke-dasharray:2 2}
+.dw .roofbg{fill:var(--bp);stroke-width:1.6} .dw .roof{fill:url(#pRib);stroke:none}
+.dw .post{fill:var(--bp);stroke-width:1.5}
+.dw .beam{fill:var(--bp);stroke-width:1.5}
+.dw .beyond{stroke-width:.8;opacity:.5}
+.dw .earth{fill:url(#pEarth);stroke:none}
+.dw .conc{fill:url(#pConc);stroke-width:1.3} .dw .conc2{fill:url(#pConc2);stroke-width:1.1}
+.dw .litter{fill:url(#pLitter);stroke:none}
+.dw .water{stroke:var(--water)} .dw .feed{stroke:var(--feed)}
+.dw .waterR{stroke:var(--water);fill:var(--water);fill-opacity:.25;stroke-width:1.2}
+.dw .feedR{stroke:var(--feed);fill:var(--feed);fill-opacity:.25;stroke-width:1.2}
+.dw text.dt{font:11px var(--f-mono)}
+.dw text.sm{font-size:10.5px;opacity:.82}
+.dw text.lbl{font:600 14px var(--f-disp)}
+.dw text.bt{font:600 12px var(--f-mono)}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <pattern id="pHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#ECF4FF" stroke-width="1" opacity=".7"/></pattern>
+  <pattern id="pMesh" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 0H7M0 0V7" stroke="#ECF4FF" stroke-width=".6" opacity=".38" fill="none"/></pattern>
+  <pattern id="pRib" width="9.5" height="10" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="10" stroke="#ECF4FF" stroke-width=".7" opacity=".45"/></pattern>
+  <pattern id="pEarth" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#ECF4FF" stroke-width=".8" opacity=".42"/></pattern>
+  <pattern id="pConc" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r="1" fill="#ECF4FF" opacity=".6"/><circle cx="10" cy="10" r=".8" fill="#ECF4FF" opacity=".6"/><path d="M8 2l3 1.5-2.5 1.5z" fill="#ECF4FF" opacity=".5"/><path d="M2 10l2.5 1-2 2z" fill="#ECF4FF" opacity=".5"/></pattern>
+  <pattern id="pConc2" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r=".7" fill="#ECF4FF" opacity=".45"/><circle cx="9" cy="8" r=".7" fill="#ECF4FF" opacity=".45"/></pattern>
+  <pattern id="pLitter" width="8" height="4" patternUnits="userSpaceOnUse"><path d="M1 2h3M5 1h2" stroke="#FFD27A" stroke-width=".8" opacity=".7"/></pattern>
+</defs></svg>
+
+<style>
+.dw .pipeB{stroke:var(--water);fill:var(--bp);stroke-width:1.4}
+.dw .valveB{stroke:var(--water);fill:var(--water);fill-opacity:.16;stroke-width:1.4}
+.dw .wline{stroke:var(--water);stroke-width:2.2}
+.dw .wthin{stroke:var(--water);stroke-width:1.5}
+.dw .feedR{stroke:var(--feed);fill:var(--feed);fill-opacity:.28;stroke-width:1.2}
+.dw .hgl{stroke:var(--water);stroke-width:1.2;stroke-dasharray:10 5}
+.dw .box{fill:var(--bp);stroke-width:1.4}
+.dw text.lbl2{font:600 12px var(--f-disp)}
+</style>
+<div class="wrap">
+  <header class="sheet cover">
+    <div>
+      <div class="eyebrow">Drawing set · ชุดแบบรวมทั้งระบบ</div>
+      <h1>ฟาร์มไก่ไข่ 400 ตัว · ระบบรวม</h1>
+      <p>เล้า 4 ล็อกผัง 2 × 2 ขนาด 12 × 8 ม. รางอาหาร PVC 2″ ในเล้า 8 ราง รางน้ำ PVC 2″ นอกเล้า 4 ราง แต่ละรางมีวาล์วลูกลอยมินิในถ้วยพักน้ำ จ่ายน้ำจากถังสำรอง 700 ลิตรบนแท่น 1.20 ม. ผ่านท่อเมน ¾″ ที่แยกเลี้ยงทีละล็อก</p>
+      <dl class="meta">
+        <dt>เล้า</dt><dd>12.00 × 8.00 ม. · เสา 9 ต้น · ชายคา 2.50 สัน 3.70</dd>
+        <dt>ไก่</dt><dd>4 ล็อก × 100 ตัว</dd>
+        <dt>อาหาร</dt><dd>8 ราง × 4.00 ม. บนฐานตั้งพื้น ขอบสูง 20</dd>
+        <dt>น้ำ</dt><dd>4 ราง × 4.80 ม. · วาล์วมินิ ½″ แบบ B</dd>
+        <dt>ถังน้ำ</dt><dd>700 ล. บนแท่น 1.20 · สำรอง 3.6 วัน (หน้าร้อน)</dd>
+        <dt>แรงดันที่วาล์ว</dt><dd>0.010–0.020 MPa (สเปก 0.01–1.5)</dd>
+      </dl>
+    </div>
+    <nav class="index" aria-label="สารบัญแบบ">
+      <h3>สารบัญแบบ</h3>
+      <ol>
+        <li><a href="#s101"><span class="n">S-101</span>ผังบริเวณและแนวท่อ</a></li>
+        <li><a href="#s102"><span class="n">S-102</span>ผังอุปกรณ์ในเล้า</a></li>
+        <li><a href="#s201"><span class="n">S-201</span>แผนผังระบบน้ำ</a></li>
+        <li><a href="#s202"><span class="n">S-202</span>รูปตัดแรงดันน้ำ</a></li>
+        <li><a href="#s301"><span class="n">S-301</span>รูปตัดเล้าพร้อมอุปกรณ์</a></li>
+        <li><a href="#g001"><span class="n">G-001</span>รายการวัสดุรวม</a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <section class="sheet" id="s101">
+    <div class="tb"><span class="no">S-101</span><div><h2>ผังบริเวณและแนวท่อ</h2><p>ถังน้ำมุมตะวันออกเฉียงเหนือ · เมนเหนือเลี้ยงล็อก A, B · เมนใต้อ้อมหัวเล้าเลี้ยงล็อก C, D</p></div><span class="sc">หน่วย ม.</span></div>
+    <div class="dwg"><svg id="site" class="dw" viewBox="0 0 1100 600" role="img" aria-label="ผังบริเวณฟาร์มและแนวท่อน้ำ"></svg></div>
+    <ul class="lg">
+      <li><i style="background:var(--water);height:3px"></i>ท่อเมน ¾″ / ท่อแยก ½″</li>
+      <li><i style="background:rgba(142,210,255,.35);border:1px solid var(--water)"></i>รางน้ำ 4.80</li>
+      <li><i style="background:rgba(255,210,122,.35);border:1px solid var(--feed)"></i>รางอาหาร 4.00</li>
+      <li><i style="border:1px solid var(--ln);width:10px;height:10px;transform:rotate(45deg)"></i>บอลวาล์ว</li>
+      <li><i style="border-top:1px dashed var(--ln);height:0"></i>ชายคา / ท่อฝังดิน</li>
+    </ul>
+  </section>
+
+  <section class="sheet" id="s102">
+    <div class="tb"><span class="no">S-102</span><div><h2>ผังอุปกรณ์ในเล้า</h2><p>รางอาหาร 2 ราง/ล็อก ห่างผนังนอก 1.40 และ 2.60 · รางน้ำนอกเล้าห่างผนัง 0.15 · รังไข่ชิดผนังกั้นกลาง</p></div><span class="sc">หน่วย ม.</span></div>
+    <div class="dwg"><svg id="lay" class="dw" viewBox="0 0 1100 660" role="img" aria-label="ผังอุปกรณ์ภายในเล้า"></svg></div>
+  </section>
+
+  <section class="sheet" id="s201">
+    <div class="tb"><span class="no">S-201</span><div><h2>แผนผังระบบน้ำ</h2><p>แผนผังเส้นเดียว ไม่ตามมาตราส่วน · ทุกล็อกปิดน้ำแยกกันได้</p></div><span class="sc">ไม่ตามมาตราส่วน</span></div>
+    <div class="dwg"><svg id="sch" class="dw" viewBox="0 0 1100 470" role="img" aria-label="แผนผังระบบน้ำแบบเส้นเดียว"></svg></div>
+    <div class="tbl"><table>
+      <thead><tr><th>ช่วงท่อ</th><th>ขนาด</th><th>ยาว (ม.)</th><th>หมายเหตุ</th></tr></thead>
+      <tbody>
+        <tr><td>ประปา → ถัง</td><td class="q">½″</td><td class="q">~5.0</td><td>รวมท่อขึ้นข้างแท่น 2.5</td></tr>
+        <tr><td>ทางออกถัง → สามทาง T0</td><td class="q">¾″</td><td class="q">~3.4</td><td>รวมท่อลงจากแท่น 1.4 · มีกรอง Y และวาล์วเมน</td></tr>
+        <tr><td>เมนเหนือ T0 → ล็อก A</td><td class="q">¾″</td><td class="q">7.45</td><td>แยกล็อก B ที่ 1.39 จาก T0</td></tr>
+        <tr><td>เมนใต้ T0 → ล็อก C</td><td class="q">¾″</td><td class="q">16.45</td><td>ช่วงหน้าประตูตะวันออกฝังลึก 0.30</td></tr>
+        <tr><td>ท่อแยกขึ้นวาล์วราง (×4)</td><td class="q">½″</td><td class="q">~0.9 ต่อจุด</td><td>บอลวาล์ว ½″ ทุกจุด</td></tr>
+        <tr><td>ท่อน้ำล้น → หลุมกรวด</td><td class="q">1″</td><td class="q">~3.0</td><td>ไม่มีวาล์ว</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="sheet" id="s202">
+    <div class="tb"><span class="no">S-202</span><div><h2>รูปตัดแรงดันน้ำ</h2><p>คลี่ตามแนวท่อจากถังถึงวาล์วรางล็อก C (ไกลสุด) · แนวดิ่งขยาย 3 เท่า</p></div><span class="sc">หน่วย ม.</span></div>
+    <div class="dwg"><svg id="hyd" class="dw" viewBox="0 0 1100 470" role="img" aria-label="รูปตัดแรงดันน้ำจากถังถึงวาล์วราง"></svg></div>
+    <div class="tbl"><table>
+      <thead><tr><th>ระดับน้ำในถัง</th><th>ผิวน้ำจากพื้น</th><th>หัวน้ำที่วาล์ว</th><th>แรงดัน</th><th>สเปก 0.01–1.5</th></tr></thead>
+      <tbody>
+        <tr><td>เต็ม (ลูกลอยตัด)</td><td class="q">2.42</td><td class="q">2.07</td><td class="q">0.020 MPa</td><td>ผ่าน</td></tr>
+        <tr><td>ครึ่งถัง</td><td class="q">1.91</td><td class="q">1.56</td><td class="q">0.015 MPa</td><td>ผ่าน</td></tr>
+        <tr><td>ถึงทางออก</td><td class="q">1.40</td><td class="q">1.05</td><td class="q">0.010 MPa</td><td>ผ่าน (พอดี)</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="sheet" id="s301">
+    <div class="tb"><span class="no">S-301</span><div><h2>รูปตัดเล้าพร้อมอุปกรณ์</h2><p>ตัดขวางผ่านล็อก B และ D ที่ 3.00 ม. จากกึ่งกลาง มองไปทิศตะวันออก · เส้นประซ้ายคือถังน้ำด้านหลัง</p></div><span class="sc">หน่วย ม.</span></div>
+    <div class="dwg"><svg id="sec" class="dw" viewBox="0 0 1100 440" role="img" aria-label="รูปตัดเล้าพร้อมรางอาหารรางน้ำและท่อ"></svg></div>
+  </section>
+
+  <section class="sheet" id="g001">
+    <div class="tb"><span class="no">G-001</span><div><h2>รายการวัสดุรวม</h2><p>รวมเล้า รางอาหาร รางน้ำ ถังน้ำ และท่อเมน · รายละเอียดตัดชิ้นส่วนดูในแบบแยกแต่ละชุด</p></div><span class="sc">เผื่อเศษ 5–10%</span></div>
+    <div class="pair">
+      <div class="tbl"><table>
+        <thead><tr><th>รายการ</th><th>จำนวน</th></tr></thead>
+        <tbody>
+          <tr><td class="grp" colspan="2">เล้า</td></tr>
+          <tr><td>เสาเหล็กกล่อง 4″ ยาว 3.00 / 4.20</td><td class="q">6 / 3</td></tr>
+          <tr><td>ฐานราก 0.60 × 0.60 × 0.70</td><td class="q">9</td></tr>
+          <tr><td>อิฐบล็อกผนัง 1 ชั้น</td><td class="q">150 ก้อน</td></tr>
+          <tr><td>เสาเอ็นเหล็กกล่อง 1″</td><td class="q">20</td></tr>
+          <tr><td>ตาข่าย</td><td class="q">~145 ม²</td></tr>
+          <tr><td>อะเส + อกไก่ C150 / ขื่อ</td><td class="q">36 / 24 ม.</td></tr>
+          <tr><td>จันทัน 4.80 / แป</td><td class="q">18 / 126 ม.</td></tr>
+          <tr><td>เมทัลชีท 4.80 / ครอบสัน</td><td class="q">34 แผ่น / 13 ม.</td></tr>
+          <tr><td>ประตู 0.90 × 2.00</td><td class="q">4</td></tr>
+          <tr><td>รังไข่ 26 ช่อง</td><td class="q">4 ชุด</td></tr>
+          <tr><td>แกลบรองพื้น 0.10</td><td class="q">~9.6 ลบ.ม.</td></tr>
+          <tr><td class="grp" colspan="2">รางอาหาร (8 ราง)</td></tr>
+          <tr><td>ท่อ PVC 2″ (4 ม.) / ฝาปิด 2″</td><td class="q">8 / 16</td></tr>
+          <tr><td>ท่อ PVC 1″ (4 ม.)</td><td class="q">5</td></tr>
+          <tr><td>สามทาง 1″ / ฝาปิด-ครอบ 1″</td><td class="q">40 / 120</td></tr>
+          <tr><td>ท่อ PVC 2½″ (แคล้มป์)</td><td class="q">1 ท่อน</td></tr>
+          <tr><td>ลวดขึง / เสาลวด 4 มม.</td><td class="q">~31 ม. / 16</td></tr>
+        </tbody>
+      </table></div>
+      <div class="tbl"><table>
+        <thead><tr><th>รายการ</th><th>จำนวน</th></tr></thead>
+        <tbody>
+          <tr><td class="grp" colspan="2">รางน้ำ (4 ราง)</td></tr>
+          <tr><td>ท่อ PVC 2″ (4 ม.) / ข้อต่อตรง 2″ / ฝาปิด 2″</td><td class="q">5 / 4 / 4</td></tr>
+          <tr><td>ท่อ PVC 4″ 10 ซม. + ฝาปิด 4″</td><td class="q">4 ชุด</td></tr>
+          <tr><td>วาล์วลูกลอยมินิ ½″ แบบ B</td><td class="q">4</td></tr>
+          <tr><td>ข้อต่อเกลียวใน ½″ / ข้องอ ½″</td><td class="q">4 / 12</td></tr>
+          <tr><td>ขาตั้งราง / ขาตั้งถ้วย</td><td class="q">20 / 4</td></tr>
+          <tr><td class="grp" colspan="2">ถังน้ำ</td></tr>
+          <tr><td>ถัง PE 700 ล.</td><td class="q">1</td></tr>
+          <tr><td>ลูกลอยก้าน ¾″ / ข้อต่อถัง ¾″, 1″</td><td class="q">1 / 3, 1</td></tr>
+          <tr><td>กรองตะกอน Y ¾″ / ยูเนียน ¾″</td><td class="q">1 / 1</td></tr>
+          <tr><td>แท่น คสล. 1.20: คอนกรีต / บล็อก</td><td class="q">~0.75 ลบ.ม. / ~115</td></tr>
+          <tr><td>เหล็ก DB12 / RB9 (10 ม.)</td><td class="q">3 / 5 เส้น</td></tr>
+          <tr><td class="grp" colspan="2">ท่อเมนและท่อแยก</td></tr>
+          <tr><td>ท่อ PVC ¾″ (4 ม.)</td><td class="q">8</td></tr>
+          <tr><td>ท่อ PVC ½″ (4 ม.)</td><td class="q">3</td></tr>
+          <tr><td>ท่อ PVC 1″ น้ำล้น</td><td class="q">~3 ม.</td></tr>
+          <tr><td>สามทาง ¾″ / สามทางลด ¾″ × ½″</td><td class="q">1 / 4</td></tr>
+          <tr><td>ข้องอ ¾″ / ฝาปิด ¾″</td><td class="q">5 / 2</td></tr>
+          <tr><td>บอลวาล์ว ½″ / ¾″</td><td class="q">5 / 3</td></tr>
+          <tr><td>กาว PVC / เทปพันเกลียว</td><td class="q">2 / 5 ม้วน</td></tr>
+        </tbody>
+      </table>
+      <p class="disclaim" style="margin-top:12px">ในระบบรวม ท่อแยก ½″ ขึ้นจากเมนใต้รางเข้าข้องอของวาล์วโดยตรง แทนท่อเดินลอยและคลิปในแบบรางน้ำแยกชุด ขนาดเหล็กโครงสร้างและฐานรากควรให้ช่างหรือวิศวกรตรวจก่อนสร้าง</p></div>
+    </div>
+  </section>
+</div>
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+const fmt=v=>Math.abs(v).toFixed(2);
+function D(id,o){
+  const svg=document.getElementById(id);
+  const {s,ox,oy,flip}=o;
+  const X=v=>ox+v*s, Y=v=>flip?oy-v*s:oy+v*s;
+  const el=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;};
+  const pl=(x1,y1,x2,y2,cls='d')=>el('line',{x1,y1,x2,y2,class:cls});
+  const c={X,Y,el,pl,s};
+  c.L=(x1,y1,x2,y2,cls='m')=>pl(X(x1),Y(y1),X(x2),Y(y2),cls);
+  c.R=(x1,y1,x2,y2,cls='m')=>{const a=X(x1),b=X(x2),p=Y(y1),q=Y(y2);
+    return el('rect',{x:Math.min(a,b),y:Math.min(p,q),width:Math.max(Math.abs(b-a),1),height:Math.max(Math.abs(q-p),1),class:cls});};
+  c.P=(pts,cls='m',open)=>el(open?'polyline':'polygon',{points:pts.map(([x,y])=>X(x)+','+Y(y)).join(' '),class:cls});
+  c.C=(x,y,r,cls='m')=>el('circle',{cx:X(x),cy:Y(y),r,class:cls});
+  c.T=(x,y,str,o={})=>{const px=X(x)+(o.dx||0),py=Y(y)+(o.dy||0);const a={x:px,y:py,class:o.cls||'t'};
+    if(o.a)a['text-anchor']=o.a;return el('text',a,str);};
+  const tick=(x,y)=>pl(x-4,y+4,x+4,y-4,'tk');
+  c.dimH=(x1,x2,y,off,label)=>{const a=X(x1),b=X(x2),y0=Y(y),py=y0+off,sg=off>=0?1:-1;
+    if(off){pl(a,y0+sg*3,a,py+sg*5);pl(b,y0+sg*3,b,py+sg*5);}
+    pl(Math.min(a,b)-5,py,Math.max(a,b)+5,py);tick(a,py);tick(b,py);
+    el('text',{x:(a+b)/2,y:py-4,'text-anchor':'middle',class:'dt'},label??fmt(x2-x1));};
+  c.dimV=(y1,y2,x,off,label)=>{const a=Y(y1),b=Y(y2),x0=X(x),px=x0+off,sg=off>=0?1:-1;
+    if(off){pl(x0+sg*3,a,px+sg*5,a);pl(x0+sg*3,b,px+sg*5,b);}
+    pl(px,Math.min(a,b)-5,px,Math.max(a,b)+5);tick(px,a);tick(px,b);
+    const ty=(a+b)/2;el('text',{x:px-4,y:ty,'text-anchor':'middle',class:'dt',transform:`rotate(-90 ${px-4} ${ty})`},label??fmt(y2-y1));};
+  c.bub=(x,y,t)=>{el('circle',{cx:X(x),cy:Y(y),r:11,class:'m'});el('text',{x:X(x),y:Y(y)+4,'text-anchor':'middle',class:'bt'},t);};
+  c.lead=(x1,y1,x2,y2,str)=>{const a=X(x1),b=Y(y1),p=X(x2),q=Y(y2);
+    el('circle',{cx:a,cy:b,r:2,class:'solid'});pl(a,b,p-4,q,'ld');el('text',{x:p,y:q+4,class:'t'},str);};
+  c.arc=(x1,y1,x2,y2,r,sw,cls='f',large=0)=>el('path',{d:`M${X(x1)} ${Y(y1)} A${r} ${r} 0 ${large} ${sw} ${X(x2)} ${Y(y2)}`,class:cls});
+  c.U=(x,y,r,cls)=>{const px=X(x),py=Y(y);el('path',{d:`M${px-r} ${py} A${r} ${r} 0 0 0 ${px+r} ${py}`,class:cls});};
+  return c;
+}
+const TK=[8.2,-5.8], XT=7.0, ZM=4.5;
+const WTS=[];for(const s of[-1,1])for(const x0 of[-5.4,0.6])WTS.push({x0,s,vx:x0+4.871,bx:x0+5.011});
+function bv(c,x,y,vert,sz=5){const px=c.X(x),py=c.Y(y),a=sz,b=sz*0.85;
+  const d=vert?`M${px-b} ${py-a} L${px+b} ${py+a} L${px-b} ${py+a} L${px+b} ${py-a} Z`:`M${px-a} ${py-b} L${px+a} ${py+b} L${px+a} ${py-b} L${px-a} ${py+b} Z`;
+  c.el('path',{d,class:'valveB'});}
+function ys(c,x,y){const px=c.X(x),py=c.Y(y);c.el('circle',{cx:px,cy:py,r:5,class:'valveB'});c.pl(px-3,py-3,px+4,py+6,'m');}
+function coopPlan(c,lbl){
+  c.R(-6.3,-4.6,6.3,4.6,'h');
+  const w=(a,b,p,q)=>c.R(a,b,p,q,'wall');
+  w(-6.05,-4.05,6.05,-3.95);w(-6.05,3.95,6.05,4.05);w(-5.95,-0.05,5.95,0.05);w(-0.05,-3.95,0.05,3.95);
+  for(const x of[-6.05,5.95])for(const [a,b] of [[-3.95,-2.45],[-1.55,1.55],[2.45,3.95]])w(x,a,x+0.1,b);
+  for(const x of[-6,0,6])for(const z of[-4,0,4])c.R(x-0.09,z-0.09,x+0.09,z+0.09,'solid');
+  for(const s of[-1,1])for(const xc of[-3,3])for(const d of[1.4,2.6]){const z=s*(4-d);c.R(xc-2,z-0.035,xc+2,z+0.035,'feedR');}
+  for(const xc of[-2.95,3.05])for(const s of[-1,1])c.R(xc-1.95,s*0.05,xc+1.95,s*0.4,'f');
+  for(const t of WTS){const z=t.s*4.23;c.R(t.x0,z-0.035,t.x0+4.8,z+0.035,'waterR');c.C(t.vx,z,Math.max(3,0.057*c.s),'water');}
+  if(lbl)[['A',-3,-2],['B',3,-2],['C',-3,2],['D',3,2]].forEach(([n,x,z])=>c.T(x,z+0.12,'ล็อก '+n,{a:'middle',cls:'lbl'}));
+}
+
+/* S-101 site plan */
+{const c=D('site',{s:40,ox:340,oy:328});
+  coopPlan(c,true);
+  c.R(TK[0]-0.6,TK[1]-0.6,TK[0]+0.6,TK[1]+0.6,'m');c.C(TK[0],TK[1],0.44*40,'post');c.C(TK[0],TK[1],0.2*40,'f');
+  c.L(11.5,TK[1],8.86,TK[1],'wthin');c.R(11.43,TK[1]-0.07,11.61,TK[1]+0.07,'m');bv(c,9.8,TK[1]);
+  c.L(TK[0],TK[1]-0.44,TK[0],TK[1]-0.68,'wthin');c.C(TK[0],TK[1]-0.82,0.22*40,'conc');
+  c.L(TK[0]-0.44,TK[1],XT,TK[1],'wline');c.L(XT,TK[1],XT,-ZM,'wline');ys(c,XT,-5.35);bv(c,XT,-5.05,true);
+  c.L(XT,-ZM,-0.45,-ZM,'wline');c.L(XT,-ZM,XT,ZM,'wline');c.L(XT,ZM,-0.45,ZM,'wline');
+  c.L(XT+0.14,-2.6,XT+0.14,2.6,'h');
+  for(const s of[-1,1])c.R(-0.5,s*ZM-0.05,-0.45,s*ZM+0.05,'solid');
+  c.C(XT,-ZM,3.5,'solid');
+  for(const t of WTS){c.L(t.bx,t.s*ZM,t.bx,t.s*4.23,'wthin');c.C(t.bx,t.s*ZM,3,'solid');}
+  c.dimH(-6,6,4.6,30,'12.00');c.dimV(-4,4,-6.3,-24,'8.00');
+  c.dimH(6,TK[0],TK[1],-34,'2.20');c.dimV(TK[1],-4,9.4,20,'1.80');
+  c.dimV(4,ZM,-1.0,-14,'0.50');
+  c.T(3,-ZM-0.12,'เมนเหนือ ¾″ 7.45',{a:'middle',cls:'sm'});
+  c.T(3,ZM+0.32,'เมนใต้ ¾″ (ต่อ) รวม 16.45',{a:'middle',cls:'sm'});
+  c.el('polygon',{points:'1070,22 1080,58 1070,51 1060,58',class:'solid'});
+  c.el('text',{x:1070,y:76,'text-anchor':'middle',class:'bt'},'N');
+  c.lead(TK[0]+0.2,TK[1]-0.8,12.6,-7.2,'หลุมน้ำล้น Ø 0.45');
+  c.lead(TK[0]+0.3,TK[1]+0.3,12.6,-6.6,'ถังสำรองน้ำ 700 ล. บนแท่น 1.20');
+  c.lead(11.52,TK[1]-0.07,12.6,-6.0,'มิเตอร์ประปาเดิม');
+  c.lead(9.8,TK[1]+0.1,12.6,-5.4,'ประปา ½″ + บอลวาล์ว');
+  c.lead(XT+0.1,-5.2,12.6,-4.8,'กรอง Y + วาล์วเมน ¾″');
+  c.lead(XT,-ZM,12.6,-4.2,'สามทาง T0 แยกเหนือ / ใต้');
+  c.lead(XT+0.14,0,12.6,-1.0,'ฝังลึก 0.30 ช่วงหน้าประตู');
+  c.lead(4.5,2.6,12.6,2.4,'รางอาหาร 4.00 (2 ราง/ล็อก)');
+  c.lead(5.611,4.4,12.6,3.6,'บอลวาล์ว ½″ ทุกล็อก');
+  c.lead(5.471,4.23,12.6,4.2,'ถ้วยพัก + วาล์วมินิ');
+  c.lead(4.2,4.26,12.6,4.8,'รางน้ำ 4.80 นอกเล้า');
+}
+
+/* S-102 interior layout */
+{const c=D('lay',{s:55,ox:440,oy:323});
+  coopPlan(c,true);
+  for(const s of[-1,1])for(const xc of[-3,3])for(const d of[1.4,2.6]){const z=s*(4-d);
+    for(const dx of[0.15,1.075,2,2.925,3.85]){const x=xc-2+dx;c.L(x,z-0.18,x,z+0.18,'k2');}}
+  for(const x of[-4.5,-3,-1.5,1.5,3,4.5])for(const z of[-4,0,4])c.R(x-0.03,z-0.03,x+0.03,z+0.03,'solid');
+  const door=(hx,hy,lx,ly,ex,ey,sw)=>{c.L(hx,hy,lx,ly,'m');c.arc(lx,ly,ex,ey,0.9*55,sw,'f');};
+  door(-6,1.55,-5.1,1.55,-6,2.45,1);door(-6,-1.55,-5.1,-1.55,-6,-2.45,0);
+  door(6,1.55,5.1,1.55,6,2.45,0);door(6,-1.55,5.1,-1.55,6,-2.45,1);
+  for(const t of WTS){c.L(t.bx,t.s*4.23,t.bx,t.s*4.5,'wthin');}
+  c.dimH(-6,0,4.6,30,'6.00');c.dimH(0,6,4.6,30,'6.00');
+  c.dimH(0,0.6,4.6,56,'0.60');c.dimH(0.6,5.4,4.6,56,'รางน้ำ 4.80');
+  c.dimH(-6,-5,-4.6,-26,'1.00');c.dimH(-5,-1,-4.6,-26,'รางอาหาร 4.00');c.dimH(-1,0,-4.6,-26,'1.00');
+  c.dimV(-4,-2.6,6.3,24,'1.40');c.dimV(-2.6,-1.4,6.3,24,'1.20');c.dimV(-4,0,6.3,50,'4.00');
+  c.lead(5,-2.6,7.4,-3.3,'รางอาหาร บนฐาน 5 ชุด');
+  c.lead(6,-2,7.4,-2.0,'ประตู 0.90 × 2.00');
+  c.lead(5,0.3,7.4,-0.2,'รังไข่ 2 ชั้น 26 ช่อง');
+  c.lead(6,0,7.4,0.9,'เสา C2 กลาง');
+  c.lead(4.925,1.58,7.4,2.0,'ขาฐานกว้าง 0.36');
+  c.lead(4,4.23,7.4,3.4,'รางน้ำ ห่างผนัง 0.15');
+  c.lead(5.471,4.23,7.4,4.2,'ถ้วยพัก + วาล์วมินิ');
+}
+
+/* S-201 schematic (pixel units) */
+{const c=D('sch',{s:1,ox:0,oy:0});
+  const nb=(x,y,w,h,t,cls)=>{c.el('rect',{x,y,width:w,height:h,rx:4,class:cls||'box'});c.el('text',{x:x+w/2,y:y+h/2+4,'text-anchor':'middle',class:'lbl2'},t);};
+  const ln=(pts,cls)=>c.el('polyline',{points:pts.map(p=>p.join(',')).join(' '),class:cls||'wline'});
+  const sv=(x,y,v)=>bv(c,x,y,v,6);
+  nb(20,62,90,36,'มิเตอร์ประปา');ln([[110,80],[205,80]],'wthin');sv(155,80);c.T(155,66,'½″',{a:'middle',cls:'dt'});
+  nb(205,62,100,36,'ลูกลอยก้าน ¾″');ln([[305,80],[330,80]],'wthin');
+  nb(330,50,120,150,'');c.T(390,110,'ถังสำรองน้ำ',{a:'middle',cls:'lbl2'});c.T(390,128,'700 ล. · แท่น 1.20',{a:'middle',cls:'sm'});
+  c.el('rect',{x:333,y:85,width:114,height:112,class:'waterR'});
+  ln([[450,70],[520,70]],'wthin');nb(520,55,90,30,'หลุมน้ำล้น');c.T(485,62,'1″',{a:'middle',cls:'dt'});
+  ln([[390,200],[390,250]],'wthin');sv(390,228,true);c.T(404,250,'ระบายตะกอน',{cls:'sm'});
+  ln([[450,180],[690,180]]);sv(475,180);c.el('rect',{x:500,y:172,width:12,height:16,class:'m'});ys(c,555,180);sv(610,180);
+  c.T(475,164,'¾″',{a:'middle',cls:'dt'});c.T(506,205,'ยูเนียน',{a:'middle',cls:'sm'});c.T(555,205,'กรอง Y',{a:'middle',cls:'sm'});c.T(610,205,'วาล์วเมน',{a:'middle',cls:'sm'});
+  c.el('circle',{cx:690,cy:180,r:5,class:'solid'});c.T(698,196,'T0',{cls:'bt'});
+  ln([[690,180],[690,120],[1070,120]]);c.T(880,138,'เมนเหนือ ¾″ · 7.45 ม.',{a:'middle',cls:'dt'});
+  ln([[690,180],[690,340],[1070,340]]);c.T(880,358,'เมนใต้ ¾″ · 16.45 ม.',{a:'middle',cls:'dt'});
+  const br=(x,y,up,lot)=>{const s=up?-1:1;c.el('circle',{cx:x,cy:y,r:4,class:'solid'});ln([[x,y],[x,y+s*90]],'wthin');sv(x,y+s*22,true);
+    nb(x-55,up?y-62:y+34,110,26,'วาล์วมินิ + ถ้วย');nb(x-55,up?y-96:y+66,110,26,'รางน้ำ ล็อก '+lot,'waterR');};
+  br(780,120,true,'B');br(1000,120,true,'A');br(860,340,false,'D');br(1040,340,false,'C');
+  c.T(735,112,'1.39',{a:'middle',cls:'dt'});c.T(890,112,'6.00',{a:'middle',cls:'dt'});
+  c.T(775,332,'10.39',{a:'middle',cls:'dt'});c.T(950,332,'6.00',{a:'middle',cls:'dt'});
+  c.T(20,440,'ท่อแยกทุกจุด ½″ · บอลวาล์ว ½″ ทุกล็อก ปิดล้างได้ทีละล็อก · ปลายเมนปิดด้วยฝาปิด ¾″',{cls:'sm'});
+}
+
+/* S-202 hydraulic profile (pixel units, vertical ×3) */
+{const c=D('hyd',{s:1,ox:0,oy:0});
+  const X=d=>110+d*40, Y=h=>400-h*120;
+  const pl=(pts,cls)=>c.el('polyline',{points:pts.map(([d,h])=>X(d)+','+Y(h)).join(' '),class:cls});
+  c.el('rect',{x:X(-2.4),y:Y(0),width:X(20)-X(-2.4),height:20,class:'earth'});c.pl(X(-2.4),Y(0),X(20),Y(0),'k');
+  c.el('rect',{x:X(-1.04),y:Y(1.32),width:48,height:Y(0)-Y(1.32),class:'m'});
+  c.el('rect',{x:X(-0.88),y:Y(2.575),width:X(0)-X(-0.88),height:Y(1.32)-Y(2.575),class:'post'});
+  c.el('rect',{x:X(-0.86),y:Y(2.42),width:X(0)-X(-0.86)-2,height:Y(1.33)-Y(2.42),class:'waterR'});
+  pl([[0,1.40],[0.28,1.40],[0.28,0.03],[3.96,0.03],[3.96,-0.3],[9.16,-0.3],[9.16,0.03],[18.5,0.03],[18.5,0.446],[18.75,0.446],[18.75,0.346]],'wline');
+  c.el('rect',{x:X(18.75)-8,y:Y(0.346),width:16,height:Y(0.24)-Y(0.346),class:'valveB'});
+  c.pl(X(18.2),Y(0.30),X(19.8),Y(0.30),'m');
+  pl([[-0.88,2.42],[19.9,2.42]],'hgl');pl([[-0.88,1.40],[19.9,1.40]],'hgl');
+  c.pl(X(17.5),Y(0.346),X(19.9),Y(0.346),'c');
+  for(const [d,t] of [[2.06,'T0'],[12.45,'แยก D'],[18.5,'แยก C']]){c.el('circle',{cx:X(d),cy:Y(0.03),r:4,class:'solid'});c.el('text',{x:X(d),y:Y(0)+15,'text-anchor':'middle',class:'sm'},t);}
+  c.el('text',{x:X(-0.44),y:Y(2.7),'text-anchor':'middle',class:'sm'},'ถัง 700 ล.');
+  c.el('text',{x:X(-0.44),y:Y(0.6),'text-anchor':'middle',class:'sm'},'แท่น 1.20');
+  c.el('text',{x:X(6.5),y:Y(-0.3)-6,'text-anchor':'middle',class:'sm'},'ฝังลึก 0.30 หน้าประตู');
+  c.el('text',{x:X(2),y:Y(2.42)-6,class:'sm'},'ผิวน้ำเต็ม +2.42');
+  c.el('text',{x:X(2),y:Y(1.40)-6,class:'sm'},'ระดับทางออกถัง +1.40');
+  c.el('text',{x:X(16.2),y:Y(0.346)-6,class:'sm'},'ทางเข้าวาล์ว +0.35');
+  c.el('text',{x:X(17),y:Y(0.30)+24,class:'sm'},'ขอบรางน้ำ +0.30');
+  c.dimV(Y(0.346),Y(2.42),X(19.9),30,'2.07 ม. = 0.020 MPa');
+  c.dimV(Y(0.346),Y(1.40),X(19.9),60,'1.05 ม. = 0.010 MPa');
+  c.dimH(X(0),X(18.75),Y(0),62,'ระยะท่อถึงวาล์วล็อก C ~18.8 ม.');
+}
+
+/* S-301 coop section with equipment (horizontal = z, north left) */
+{const c=D('sec',{s:70,ox:550,oy:360,flip:true});
+  c.R(-7.4,0,5.6,-0.25,'earth');
+  for(const z of[-4,0,4]){c.R(z-0.3,-0.7,z+0.3,-0.5,'h');c.R(z-0.05,-0.5,z+0.05,0,'h');}
+  c.R(-4.075,0,-3.925,2.5,'beyond');c.R(-0.075,0,0.075,3.55,'beyond');c.R(3.925,0,4.075,2.5,'beyond');c.R(-4,2.38,4,2.5,'beyond');
+  c.R(-3.95,0,-0.05,0.05,'litter');c.R(0.05,0,3.95,0.05,'litter');
+  for(const z of[-4,0,4]){c.R(z-0.05,0,z+0.05,0.2,'cutS');c.L(z,0.2,z,2.35,'meshL');}
+  c.R(-4.075,2.35,-3.925,2.5,'cutS');c.R(3.925,2.35,4.075,2.5,'cutS');c.R(-0.075,3.55,0.075,3.7,'cutS');
+  c.P([[-4.6,2.32],[0,3.7],[4.6,2.32],[4.6,2.42],[0,3.8],[-4.6,2.42]],'cutS');
+  c.P([[-4.6,2.48],[0,3.86],[4.6,2.48]],'k',true);
+  for(const s of[-1,1])for(const p of[[0.05,0.4]]){const a=s*p[0],b=s*p[1];c.R(Math.min(a,b),0.45,Math.max(a,b),1.05,'m');c.L(Math.min(a,b),0.75,Math.max(a,b),0.75,'m');}
+  for(const z of[-2.6,-1.4,1.4,2.6]){c.L(z-0.18,0.017,z+0.18,0.017,'k2');c.L(z,0.03,z,0.156,'m');c.R(z-0.04,0.156,z+0.04,0.186,'m');
+    c.el('path',{d:`M${c.X(z)-4} ${c.Y(0.2)} A4 4 0 0 0 ${c.X(z)+4} ${c.Y(0.2)}`,class:'feed k2'});}
+  for(const s of[-1,1]){const z=s*4.23;c.L(z,0,z,0.25,'m');c.el('path',{d:`M${c.X(z)-4} ${c.Y(0.3)} A4 4 0 0 0 ${c.X(z)+4} ${c.Y(0.3)}`,class:'water k2'});
+    c.C(s*4.5,0.03,3,'water');}
+  c.R(-6.4,0,-5.2,1.32,'h');c.R(-6.24,1.32,-5.36,2.575,'h');c.R(-6.42,2.42,-6.22,2.44,'h');
+  c.L(-7.4,0,5.6,0,'k');
+  c.T(-2,1.6,'ล็อก B',{a:'middle',cls:'lbl'});c.T(2,1.6,'ล็อก D',{a:'middle',cls:'lbl'});
+  c.T(-5.8,2.72,'ถังน้ำ (ด้านหลัง)',{a:'middle',cls:'sm'});
+  c.dimH(-4,0,0,38,'4.00');c.dimH(0,4,0,38,'4.00');c.dimH(-4,4,0,60,'8.00');
+  c.dimV(0,2.5,-6.4,-36,'2.50');c.dimV(0,3.7,-6.4,-60,'3.70');
+  c.lead(3.5,2.75,4.9,3.3,'เมทัลชีท ลาด 17°');
+  c.lead(4,1.6,4.9,1.9,'ตาข่าย + บล็อก 1 ชั้น');
+  c.lead(4.23,0.3,4.9,1.0,'รางน้ำ ขอบ 0.30');
+  c.lead(4.5,0.03,4.9,0.45,'ท่อเมน ¾″');
+  c.lead(1.4,0.2,1.9,0.9,'รางอาหาร ขอบ 0.20');
+  c.lead(0.4,0.9,0.9,1.3,'รังไข่');
+}
+})();
+</script>
+
+</body></html>

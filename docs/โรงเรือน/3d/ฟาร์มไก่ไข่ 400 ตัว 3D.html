@@ -1,0 +1,499 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ฟาร์มไก่ไข่ 400 ตัว 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one-screen viewer — toolbar band, 3D stage with pressure readout, system panel on the right */
+:root{
+  --bg:#EEF0EA; --panel:#FFFFFF; --ink:#1E2A36; --muted:#66717C; --rule:#D5DAD1;
+  --accent:#2B78AC; --chip:#E4E8E0; --sky:#DCE6EA; --ok:#2E8B57; --bad:#B23A32;
+  --f-disp:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12181D; --panel:#182027; --ink:#E3E8EB; --muted:#8B97A1; --rule:#2A343C;
+  --accent:#5AA8DB; --chip:#222C34; --sky:#1B252D; --ok:#5CC08A; --bad:#E0726A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12181D; --panel:#182027; --ink:#E3E8EB; --muted:#8B97A1; --rule:#2A343C;
+  --accent:#5AA8DB; --chip:#222C34; --sky:#1B252D; --ok:#5CC08A; --bad:#E0726A; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 var(--f-body);display:flex;flex-direction:column;overflow:hidden}
+[hidden]{display:none!important}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:10px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:var(--panel);border-bottom:1px solid var(--rule)}
+h1{font-family:var(--f-disp);font-weight:700;font-size:19px;margin:0;line-height:1.2}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.grp{display:flex;gap:2px;background:var(--chip);border-radius:7px;padding:2px;align-items:center}
+button{font:500 13px var(--f-body);color:var(--ink);background:transparent;border:0;border-radius:5px;padding:5px 9px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.18);color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.main{flex:1;min-height:0;display:flex;position:relative}
+.stage{position:relative;flex:1;min-width:0;overflow:hidden}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+.tag{position:absolute;left:0;top:0;pointer-events:none;font:600 12px var(--f-disp);background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.tag.lot{font-size:13px;border-color:var(--accent)}
+.hud{position:absolute;left:12px;top:12px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:10px 12px;width:250px;font-size:12.5px;display:grid;gap:6px}
+.hud .row{display:flex;justify-content:space-between;gap:8px;font-variant-numeric:tabular-nums}
+.hud b{font-family:var(--f-mono);font-weight:500}
+.hud input{width:100%;accent-color:var(--accent)}
+.st{display:inline-flex;align-items:center;gap:6px}
+.st i{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.st.bad i{background:var(--bad)} .st.bad{color:var(--bad)}
+.hint{position:absolute;right:12px;bottom:10px;font-size:12px;color:var(--muted)}
+aside{width:360px;flex:none;overflow-y:auto;background:var(--panel);border-left:1px solid var(--rule);
+  padding-block:16px 32px;padding-left:18px;padding-right:max(18px,env(safe-area-inset-right,0px));display:grid;gap:20px;align-content:start}
+aside h2{font-family:var(--f-disp);font-weight:600;font-size:15px;margin:0 0 8px;display:flex;gap:8px;align-items:baseline}
+aside h2 .no{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+aside p{margin:0 0 6px} aside ol,aside ul{margin:0;padding-left:18px;display:grid;gap:4px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+td{padding:5px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td+td{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;padding-left:10px;white-space:nowrap}
+aside a{color:var(--accent)}
+@media (max-width:640px){.tools{margin-left:0}.hint{display:none}.hud{width:200px}}
+@media (max-width:900px){aside{position:absolute;inset:0;width:auto;border-left:0;z-index:5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+</style>
+
+<div class="bar">
+  <h1>ฟาร์มไก่ไข่ 400 ตัว</h1>
+  <div class="tools">
+    <div class="grp" role="group" aria-label="มุมมอง">
+      <button id="vAll" aria-pressed="true">ภาพรวม</button><button id="vTop" aria-pressed="false">แปลนท่อ</button>
+      <button id="vTank" aria-pressed="false">ถังน้ำ</button><button id="vValve" aria-pressed="false">วาล์วราง</button><button id="vLot" aria-pressed="false">ในล็อก</button>
+    </div>
+    <div class="grp" role="group" aria-label="หลังคา">
+      <button id="rSolid" aria-pressed="true">หลังคา</button><button id="rClear" aria-pressed="false">โปร่ง</button><button id="rOff" aria-pressed="false">ซ่อน</button>
+    </div>
+    <div class="grp">
+      <button id="tFlow" aria-pressed="true">ทางน้ำ</button><button id="tMesh" aria-pressed="true">ตาข่าย</button>
+      <button id="tHens" aria-pressed="true">ไก่</button><button id="tTank" aria-pressed="false">ถังโปร่ง</button>
+      <button id="tInfo" aria-pressed="true">รายละเอียด</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="stage" id="stage">
+    <canvas id="c" aria-label="โมเดล 3 มิติ ฟาร์มไก่ไข่ เล้า 4 ล็อก รางอาหาร รางน้ำ และถังสำรองน้ำพร้อมท่อ"></canvas>
+    <div class="hud">
+      <div class="row"><span>น้ำในถัง</span><b id="hL">669 ล.</b></div>
+      <input type="range" id="lvl" min="0" max="100" value="100" aria-label="ระดับน้ำในถัง">
+      <div class="row"><span>หัวน้ำถึงวาล์วราง</span><b id="hH">2.07 ม.</b></div>
+      <div class="row"><span>แรงดันที่วาล์ว</span><b id="hP">0.020 MPa</b></div>
+      <div class="row"><span class="st" id="hS"><i></i><span>ผ่านสเปกวาล์ว (≥0.010)</span></span></div>
+      <div class="row"><span>ใช้ได้อีก (หน้าร้อน)</span><b id="hD">3.6 วัน</b></div>
+    </div>
+    <div id="tags"></div>
+    <div class="hint">ลากเพื่อหมุน · ล้อเมาส์/บีบนิ้วเพื่อซูม</div>
+  </div>
+
+  <aside id="info" aria-label="รายละเอียดระบบ">
+    <section>
+      <h2><span class="no">01</span>ภาพรวม</h2>
+      <table>
+        <tr><td>เล้า 4 ล็อก (2 × 2)</td><td>12 × 8 ม.</td></tr>
+        <tr><td>ไก่</td><td>4 × 100 ตัว</td></tr>
+        <tr><td>รางน้ำนอกเล้า</td><td>4 × 4.80 ม.</td></tr>
+        <tr><td>รางอาหารในเล้า</td><td>8 × 4.00 ม.</td></tr>
+        <tr><td>ถังสำรองน้ำบนแท่น 1.20</td><td>700 ล.</td></tr>
+        <tr><td>ท่อเมน ¾″ (บนดิน)</td><td>~27 ม.</td></tr>
+      </table>
+    </section>
+    <section>
+      <h2><span class="no">02</span>ทางเดินน้ำ</h2>
+      <ol>
+        <li>ประปา ½″ → บอลวาล์ว → ลูกลอยก้าน ¾″ ในถัง</li>
+        <li>ทางออกถัง ¾″ → บอลวาล์ว → ยูเนียน → ลงพื้น</li>
+        <li>กรองตะกอน Y → วาล์วเมน → สามทางแยกเหนือ/ใต้</li>
+        <li>เมนเหนือเลี้ยงล็อก A, B · เมนใต้อ้อมหัวเล้าเลี้ยงล็อก C, D</li>
+        <li>แต่ละล็อก: สามทาง → บอลวาล์ว ½″ → ขึ้นข้องอ → วาล์วลูกลอยมินิในถ้วยพักน้ำ → รางน้ำ</li>
+      </ol>
+    </section>
+    <section>
+      <h2><span class="no">03</span>แรงดัน</h2>
+      <p>วาล์วมินิรับแรงดัน 0.01–1.5 MPa ทางเข้าวาล์วสูงจากพื้น 0.35 ม. แท่นถัง 1.20 ม. ให้หัวน้ำ 1.05–2.07 ม. (0.010–0.020 MPa) ผ่านสเปกตลอดจนน้ำถึงทางออกถัง</p>
+      <p>เลื่อนแถบระดับน้ำในกรอบซ้ายบนเพื่อดูแรงดันที่วาล์วราง</p>
+    </section>
+    <section>
+      <h2><span class="no">04</span>ตำแหน่ง</h2>
+      <ul>
+        <li>ถังอยู่มุมตะวันออกเฉียงเหนือ ห่างผนังตะวันออก 2.2 ม. ห่างผนังเหนือ 1.8 ม.</li>
+        <li>ท่อเมนเดินห่างผนังเล้า 0.50 ม. ช่วงหน้าประตูตะวันออกฝังลึก 0.30 ม.</li>
+        <li>ถ้วยพักน้ำและวาล์วอยู่ปลายรางฝั่งตะวันออกของทุกราง</li>
+      </ul>
+    </section>
+    <section>
+      <h2><span class="no">05</span>แบบแยกชิ้น</h2>
+      <ul>
+        <li><a href="https://claude.ai/artifact/1mjQcra7yrNGgCtLV8o7Wj" target="_blank" rel="noopener">โมเดลเล้า</a> · <a href="https://claude.ai/artifact/Thgj4z4EaFz5sedpVQUrxd" target="_blank" rel="noopener">แปลนเล้า</a></li>
+        <li><a href="https://claude.ai/artifact/EoiPkMjabXytoVVrZ6ybQU" target="_blank" rel="noopener">รางน้ำ 3D</a> · <a href="https://claude.ai/artifact/DAY59m6YDkxA1yEo6feved" target="_blank" rel="noopener">พิมพ์เขียวรางน้ำ</a></li>
+        <li><a href="https://claude.ai/artifact/5suzFFUTTJtS4XpeURJ1M5" target="_blank" rel="noopener">รางอาหาร 3D</a> · <a href="https://claude.ai/artifact/4YDe513QsKUZuiJ2nQUniy" target="_blank" rel="noopener">พิมพ์เขียวรางอาหาร</a></li>
+        <li><a href="https://claude.ai/artifact/5PtTegtE7fa4SJ3mwBJmAH" target="_blank" rel="noopener">ถังน้ำ 3D</a> · <a href="https://claude.ai/artifact/HiQkHvNKn9PwnZHHFSt7jF" target="_blank" rel="noopener">พิมพ์เขียวถังน้ำ</a></li>
+      </ul>
+    </section>
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const W=12, D=8, EAVE=2.5, RIDGE=3.7, OV=0.6, SL=(RIDGE-EAVE)/(D/2), ANG=Math.atan(SL);
+const stage=document.getElementById('stage'), canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(40,1,0.1,200);
+
+function applyTheme(){
+  const v=getComputedStyle(document.documentElement).getPropertyValue('--sky').trim()||'#DCE6EA';
+  scene.background=new THREE.Color(v);
+}
+applyTheme();
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme)}catch(e){}
+new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x6b6b55,0.7));
+const sun=new THREE.DirectionalLight(0xffffff,0.85);
+sun.position.set(10,18,12); sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-12,right:12,top:12,bottom:-12,near:1,far:60});
+scene.add(sun);
+
+// materials
+const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.85,metalness:0},o));
+const mBlock=M(0xA9ADA6), mSteel=M(0x8A9096,{metalness:.4,roughness:.5}), mPVC=M(0xF2F2EE,{roughness:.4,side:THREE.DoubleSide});
+const mWater=M(0x3D8FD1,{roughness:.2}), mFeed=M(0xD9A548), mWood=M(0x9C6B3F), mDoor=M(0x6B4A2E), mHen=M(0x9A5A2E), mHead=M(0xB06A3A), mComb=M(0xC23A2A);
+
+function tex(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=4;return t;}
+const meshTex=tex(64,64,(g,w,h)=>{g.clearRect(0,0,w,h);g.strokeStyle='rgba(60,64,68,0.95)';g.lineWidth=3;
+  for(let i=0;i<=4;i++){g.beginPath();g.moveTo(i*16,0);g.lineTo(i*16,h);g.stroke();g.beginPath();g.moveTo(0,i*16);g.lineTo(w,i*16);g.stroke();}});
+const roofTex=tex(64,8,(g,w,h)=>{const gr=g.createLinearGradient(0,0,w,0);
+  gr.addColorStop(0,'#7E929E');gr.addColorStop(.25,'#B7C8D2');gr.addColorStop(.5,'#9DB0BC');gr.addColorStop(.75,'#B7C8D2');gr.addColorStop(1,'#7E929E');g.fillStyle=gr;g.fillRect(0,0,w,h);});
+const groundTex=tex(128,128,(g,w,h)=>{g.fillStyle='#8E9A6B';g.fillRect(0,0,w,h);for(let i=0;i<900;i++){g.fillStyle=Math.random()<.5?'rgba(70,85,50,.35)':'rgba(170,175,120,.3)';g.fillRect(Math.random()*w,Math.random()*h,2,2);}});
+groundTex.repeat.set(20,20);
+const litterTex=tex(128,128,(g,w,h)=>{g.fillStyle='#D9C38F';g.fillRect(0,0,w,h);for(let i=0;i<1400;i++){g.fillStyle=Math.random()<.5?'rgba(170,140,80,.5)':'rgba(240,225,180,.6)';g.fillRect(Math.random()*w,Math.random()*h,3,1);}});
+litterTex.repeat.set(6,4);
+
+function box(w,h,d,mat,x,y,z,parent){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;(parent||scene).add(m);return m;}
+
+// ground + litter
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(60,60),M(0xffffff,{map:groundTex}));
+ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
+const lit=new THREE.Mesh(new THREE.BoxGeometry(W,0.04,D),M(0xffffff,{map:litterTex}));lit.position.y=0.02;lit.receiveShadow=true;scene.add(lit);
+
+// block walls (1 course = 0.20)
+const BH=0.2;
+box(W+0.1,BH,0.1,mBlock,0,BH/2,-4); box(W+0.1,BH,0.1,mBlock,0,BH/2,4);
+box(0.1,BH,D,mBlock,0,BH/2,0); box(W,BH,0.1,mBlock,0,BH/2,0);
+for(const sx of[-6,6]){ for(const [a,b] of [[-4,-2.45],[-1.55,1.55],[2.45,4]]) box(0.1,BH,b-a,mBlock,sx,BH/2,(a+b)/2); }
+
+// posts
+const XS=[-6,0,6], XR=[-6,-4.5,-3,-1.5,0,1.5,3,4.5,6];
+for(const x of XS){ box(0.15,EAVE,0.15,mSteel,x,EAVE/2,-4); box(0.15,EAVE,0.15,mSteel,x,EAVE/2,4); box(0.15,RIDGE,0.15,mSteel,x,RIDGE/2,0); }
+// beams
+box(W+0.15,0.15,0.1,mSteel,0,EAVE-0.075,-4); box(W+0.15,0.15,0.1,mSteel,0,EAVE-0.075,4);
+box(W+0.15,0.15,0.1,mSteel,0,RIDGE-0.075,0);
+for(const x of XS) box(0.08,0.12,D,mSteel,x,EAVE-0.06,0);
+const RL=Math.hypot(4+OV,(4+OV)*SL);
+for(const x of XR) for(const s of[-1,1]){
+  const r=box(0.08,0.12,RL,mSteel,x,(RIDGE+EAVE-OV*SL)/2,s*(4+OV)/2); r.rotation.x=s*ANG; }
+// mesh studs between main posts: hold the wire, carry no roof load
+for(const x of[-4.5,-3,-1.5,1.5,3,4.5]) for(const z of[-4,0,4]) box(0.04,EAVE-BH,0.04,mSteel,x,BH+(EAVE-BH)/2,z);
+for(const z of[-2,2]) box(0.04,EAVE-BH,0.04,mSteel,0,BH+(EAVE-BH)/2,z);
+// purlins
+const roof=new THREE.Group(); scene.add(roof);
+for(const s of[-1,1]) for(let i=0;i<5;i++){
+  const t=(i+0.5)/5, z=s*(4+OV)*t, y=RIDGE-(4+OV)*t*SL+0.09;
+  box(W+0.6,0.05,0.07,mSteel,0,y,z,roof); }
+// roof sheets
+const mRoof=M(0xffffff,{map:roofTex,metalness:.35,roughness:.5,transparent:true,opacity:1});
+roofTex.repeat.set((W+0.6)/0.19,1);
+const sheets=[];
+for(const s of[-1,1]){const sh=box(W+0.6,0.025,RL,mRoof,0,(RIDGE+EAVE-OV*SL)/2+0.14,s*(4+OV)/2,roof);sh.rotation.x=s*ANG;sheets.push(sh);}
+box(W+0.6,0.06,0.35,mSteel,0,RIDGE+0.17,0,roof);
+
+// wire mesh panels
+const meshGroup=new THREE.Group();scene.add(meshGroup);
+const mMeshBase={map:meshTex,transparent:true,alphaTest:.2,side:THREE.DoubleSide,roughness:.6,metalness:.3,depthWrite:false};
+function meshPanel(w,h,x,y,z,ry){const t=meshTex.clone();t.needsUpdate=true;t.repeat.set(w/0.4,h/0.4);
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),M(0xffffff,Object.assign({},mMeshBase,{map:t})));m.position.set(x,y,z);m.rotation.y=ry||0;meshGroup.add(m);return m;}
+const MH=EAVE-BH, MY=BH+MH/2;
+meshPanel(W,MH,0,MY,-4); meshPanel(W,MH,0,MY,4);
+meshPanel(W,MH,0,MY,0); meshPanel(D,MH,0,MY,0,Math.PI/2);
+for(const sx of[-6,6]){
+  for(const [a,b] of [[-4,-2.45],[-1.55,1.55],[2.45,4]]) meshPanel(b-a,MH,sx,MY,(a+b)/2,Math.PI/2);
+  for(const zc of[-2,2]) meshPanel(0.9,0.5,sx,2.25,zc,Math.PI/2);
+  // gable triangle
+  const shp=new THREE.Shape();shp.moveTo(-4,EAVE);shp.lineTo(4,EAVE);shp.lineTo(0,RIDGE);shp.lineTo(-4,EAVE);
+  const g=new THREE.ShapeGeometry(shp);
+  const uv=g.attributes.uv; for(let i=0;i<uv.count;i++){uv.setXY(i,uv.getX(i)/0.4,uv.getY(i)/0.4);}
+  const gm=new THREE.Mesh(g,M(0xffffff,Object.assign({},mMeshBase)));gm.rotation.y=Math.PI/2;gm.position.x=sx;meshGroup.add(gm);
+}
+// doors
+for(const sx of[-6,6]) for(const zc of[-2,2]){
+  box(0.05,2.0,0.05,mDoor,sx,1.0,zc-0.425); box(0.05,2.0,0.05,mDoor,sx,1.0,zc+0.425);
+  box(0.05,0.05,0.9,mDoor,sx,1.975,zc); box(0.05,0.05,0.9,mDoor,sx,0.05,zc); box(0.05,0.05,0.9,mDoor,sx,1.0,zc);
+  meshPanel(0.85,1.9,sx,1.0,zc,Math.PI/2);
+}
+// nest boxes along the middle partition, 2 tiers x 13
+const nestTex=tex(260,40,(g,w,h)=>{g.fillStyle='#9C6B3F';g.fillRect(0,0,w,h);g.fillStyle='#3B2414';
+  for(let r=0;r<2;r++)for(let i=0;i<13;i++){g.fillRect(i*20+4,r*20+5,12,11);}
+  g.strokeStyle='#7A5230';g.lineWidth=1;for(let i=0;i<=13;i++){g.beginPath();g.moveTo(i*20,0);g.lineTo(i*20,h);g.stroke();}});
+const mNestFront=M(0xffffff,{map:nestTex});
+for(const s of[-1,1]) for(const xc of[-2.95,3.05]){
+  const mats=[mWood,mWood,mWood,mWood,s>0?mNestFront:mWood,s<0?mNestFront:mWood];
+  const nb=new THREE.Mesh(new THREE.BoxGeometry(3.9,0.6,0.35),mats);nb.position.set(xc,0.75,s*0.225);nb.castShadow=true;nb.receiveShadow=true;scene.add(nb);
+  for(const lx of[-1.9,1.9]) box(0.04,0.45,0.04,mWood,xc+lx,0.225,s*0.36);
+}
+
+// hens: 100 per lot
+const henGroup=new THREE.Group();scene.add(henGroup);
+const N=400;
+const body=new THREE.InstancedMesh(new THREE.SphereGeometry(1,12,8),mHen,N);
+const head=new THREE.InstancedMesh(new THREE.SphereGeometry(1,10,8),mHead,N);
+const comb=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mComb,N);
+body.castShadow=true;henGroup.add(body,head,comb);
+const dm=new THREE.Object3D();let k=0;
+function rnd(a,b){return a+Math.random()*(b-a);}
+for(const sx of[-1,1]) for(const sz of[-1,1]){
+  let n=0,guard=0;
+  while(n<100&&guard++<5000){
+    const x=sx>0?rnd(0.3,5.7):rnd(-5.7,-0.3), z=sz>0?rnd(0.6,3.75):rnd(-3.75,-0.6);
+    const ax=Math.abs(z), xr=Math.abs(x-sx*3);
+    if(xr<2.15 && (Math.abs(ax-1.4)<0.16||Math.abs(ax-2.6)<0.16)) continue;
+    const yaw=Math.random()*Math.PI*2;
+    dm.position.set(x,0.17,z);dm.rotation.set(0,yaw,0);dm.scale.set(0.14,0.12,0.095);dm.updateMatrix();body.setMatrixAt(k,dm.matrix);
+    const hx=x+Math.cos(yaw)*0.13, hz=z-Math.sin(yaw)*0.13;
+    dm.position.set(hx,0.29,hz);dm.scale.set(0.05,0.055,0.045);dm.updateMatrix();head.setMatrixAt(k,dm.matrix);
+    dm.position.set(hx,0.35,hz);dm.scale.set(0.05,0.03,0.012);dm.updateMatrix();comb.setMatrixAt(k,dm.matrix);
+    k++;n++;
+  }
+}
+body.count=head.count=comb.count=k;
+// ===== shared helpers (cm components scaled to metres) =====
+const $=id=>document.getElementById(id);
+Object.assign(sun.shadow.camera,{left:-16,right:16,top:16,bottom:-16});sun.shadow.camera.updateProjectionMatrix();
+sun.position.set(12,20,10);
+const P=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.5,metalness:0},o));
+const mP2=P(0xDADDDE,{roughness:.35}), mP2in=P(0xC8CCCE), mCap=P(0xB8BDC0), mP1=P(0xEEEFEE,{roughness:.35}), mFit=P(0xD6D9D6);
+const mBlue=P(0x2F7FD0,{roughness:.35}), mDark=P(0x4A4F55), mRed=P(0xC8302B), mBrass=P(0xC2A25A,{metalness:.6,roughness:.35});
+const mGreen=P(0x3E7A55,{roughness:.6}), mWire=P(0x55595E,{metalness:.6,roughness:.35}), mWhite=P(0xF2F3F1,{roughness:.35});
+const mWat=new THREE.MeshStandardMaterial({color:0x5AA9E0,transparent:true,opacity:.65,roughness:.1,depthWrite:false});
+const mVB=new THREE.MeshStandardMaterial({color:0x3D8FE0,transparent:true,opacity:.6,roughness:.25,depthWrite:false});
+const mCup=new THREE.MeshStandardMaterial({color:0xC9CED2,transparent:true,opacity:.4,roughness:.4,side:THREE.DoubleSide,depthWrite:false});
+const mTank=P(0x2F5F8F,{roughness:.55,side:THREE.DoubleSide});
+const feedTex=tex(128,128,(g,w,h)=>{g.fillStyle='#C9A25E';g.fillRect(0,0,w,h);for(let i=0;i<1400;i++){const r=Math.random();g.fillStyle=r<.4?'#A97E3C':r<.7?'#E2C384':'#8C6A33';g.beginPath();g.arc(Math.random()*w,Math.random()*h,1+Math.random()*1.6,0,7);g.fill();}});
+feedTex.repeat.set(40,1);const mFeedT=P(0xffffff,{map:feedTex,roughness:.95});
+const blockTex=tex(128,128,(g,w,h)=>{g.fillStyle='#A9ADA6';g.fillRect(0,0,w,h);g.strokeStyle='#8A8E87';g.lineWidth=3;for(let r=0;r<4;r++){g.beginPath();g.moveTo(0,r*32);g.lineTo(w,r*32);g.stroke();const o=r%2?32:0;for(let x=o;x<w+64;x+=64){g.beginPath();g.moveTo(x,r*32);g.lineTo(x,r*32+32);g.stroke();}}});
+blockTex.repeat.set(1,3.6);const mBlk=P(0xffffff,{map:blockTex,roughness:.9}), mConc=P(0xBEBDB6,{roughness:.9});
+const sh=m=>{m.castShadow=true;m.receiveShadow=true;return m;};
+const UP=new THREE.Vector3(0,1,0);
+function rodTo(m,a,b){const d=new THREE.Vector3().subVectors(b,a);m.position.copy(a).add(b).multiplyScalar(.5);m.scale.set(1,Math.max(d.length(),1e-4),1);m.quaternion.setFromUnitVectors(UP,d.normalize());}
+function pipe(par,pts,r,mat,fit=true){for(let i=0;i<pts.length-1;i++){const m=sh(new THREE.Mesh(new THREE.CylinderGeometry(r,r,1,14),mat));rodTo(m,new THREE.Vector3(...pts[i]),new THREE.Vector3(...pts[i+1]));par.add(m);}
+  if(fit)for(let i=1;i<pts.length-1;i++){const e=sh(new THREE.Mesh(new THREE.SphereGeometry(r*1.3,12,8),mFit));e.position.set(...pts[i]);par.add(e);}}
+function cyl(par,r,h,mat,axis,x,y,z,seg=20){const g=new THREE.CylinderGeometry(r,r,h,seg);if(axis==='x')g.rotateZ(Math.PI/2);if(axis==='z')g.rotateX(Math.PI/2);const m=sh(new THREE.Mesh(g,mat));m.position.set(x,y,z);par.add(m);return m;}
+function bx(par,w,h,d,mat,x,y,z){const m=sh(new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat));m.position.set(x,y,z);par.add(m);return m;}
+function ballValve(par,x,y,z,axis,r){cyl(par,r*1.6,r*5,mBrass,axis,x,y,z,12);cyl(par,r*.4,r*2.2,mDark,null,x,y+r*2,z,8);
+  bx(par,axis==='x'?r*6:r*1.2,r*.6,axis==='x'?r*1.2:r*6,mRed,x,y+r*3,z);}
+const CUTA=63*Math.PI/180, A0=Math.PI/2+CUTA, A1=Math.PI/2-CUTA+2*Math.PI;
+function arcShape(R,r,a0,a1){const s=new THREE.Shape();s.absarc(0,0,R,a0,a1,false);s.absarc(0,0,r,a1,a0,true);return s;}
+function segShape(r,y){const a=Math.asin(y/r),s=new THREE.Shape();s.moveTo(-Math.sqrt(r*r-y*y),y);s.absarc(0,0,r,Math.PI-a,2*Math.PI+a,false);s.closePath();return s;}
+function halfTrough(par,L,HC,fill,fillMat){const g=new THREE.Group();g.position.set(0,HC,0);g.rotation.y=Math.PI/2;par.add(g);
+  g.add(sh(new THREE.Mesh(new THREE.ExtrudeGeometry(arcShape(3,2.75,A0,A1),{depth:L,bevelEnabled:false,curveSegments:28}),[mP2,mP2in])));
+  for(const a of[A0,A1]){const b=sh(new THREE.Mesh(new THREE.CylinderGeometry(.24,.24,L,8),mP2));b.geometry.rotateX(Math.PI/2);
+    b.position.set(Math.cos(a)*2.88-Math.sign(Math.cos(a))*0.12,Math.sin(a)*2.88,L/2);g.add(b);}
+  const f=new THREE.Mesh(new THREE.ExtrudeGeometry(segShape(2.72,fill),{depth:L-1,bevelEnabled:false,curveSegments:24}),fillMat);f.position.z=0.5;g.add(f);
+  return g;}
+
+// ===== water trough 480 cm with cup + mini valve (valve end at +x) =====
+function makeWaterTrough(){
+  const g=new THREE.Group(),L=480,HC=28.6,CX=L+7.1,CR=5.7,VB=HC-3.9,VT=HC+1.6;
+  const t=halfTrough(g,L-3,HC,0.6,mWat);
+  cyl(g,3.25,1.2,mCap,'x',-0.6,HC,0,24);
+  const sl=sh(new THREE.Mesh(new THREE.CylinderGeometry(3,3,4.7,24,1,true),mP2));sl.rotation.z=Math.PI/2;sl.position.set(L-0.65,HC,0);g.add(sl);
+  const cp=sh(new THREE.Mesh(new THREE.ExtrudeGeometry(arcShape(3.35,3,A0,A1),{depth:6,bevelEnabled:false,curveSegments:24}),mCap));cp.position.z=397;t.add(cp);
+  const cup=new THREE.Mesh(new THREE.CylinderGeometry(CR,CR,9.5,32,1,true),mCup);cup.position.set(CX,HC+0.25,0);g.add(cup);
+  cyl(g,CR+0.3,0.6,mCap,null,CX,HC-4.2,0,32);
+  const cw=new THREE.Mesh(new THREE.CylinderGeometry(CR-0.3,CR-0.3,4.5,32),mWat);cw.position.set(CX,HC-3.9+2.25,0);g.add(cw);
+  const vb=new THREE.Mesh(new THREE.CylinderGeometry(2.5,2.4,VT-VB,24),mVB);vb.position.set(CX,(VB+VT)/2,0);g.add(vb);
+  cyl(g,2.65,1.2,mWhite,null,CX,VT+0.6,0,24);cyl(g,1.2,0.8,mWhite,null,CX,VT+1.6,0,6);cyl(g,0.95,2.4,mWhite,null,CX,VT+3.2,0,12);
+  cyl(g,0.85,2.4,mWhite,'x',CX-3.7,VT-0.4,0,12);
+  cyl(g,1.35,2,mDark,null,CX,VT+5.4,0,16);
+  const rh=HC+14-(VT+6.4);cyl(g,1.05,rh,mBlue,null,CX,VT+6.4+rh/2,0,12);
+  const elG=new THREE.TorusGeometry(2,1.12,10,14,Math.PI/2);elG.rotateZ(Math.PI/2);const el=sh(new THREE.Mesh(elG,mBlue));el.position.set(CX+2,HC+14,0);g.add(el);
+  cyl(g,1.05,12,mBlue,'x',CX+8,HC+16,0,12);
+  const n=5,cr=new THREE.TorusGeometry(3.35,.35,8,20,Math.PI);cr.rotateZ(Math.PI);cr.rotateY(Math.PI/2);
+  for(let i=0;i<n;i++){const x=15+i*(L-30)/(n-1);const c=sh(new THREE.Mesh(cr,mGreen));c.position.set(x,HC,0);g.add(c);
+    bx(g,1.6,HC-3.6,1.6,mGreen,x,(HC-3.6)/2,0);bx(g,9,0.8,9,mGreen,x,0.4,0);bx(g,1.2,0.8,7.4,mGreen,x,HC-3.9,0);}
+  bx(g,1.6,HC-4.5,1.6,mGreen,CX,(HC-4.5)/2,0);bx(g,12,0.8,12,mGreen,CX,0.4,0);
+  g.scale.setScalar(0.01);return g;}
+
+// ===== feed trough 400 cm on PVC floor stands =====
+function makeFeeder(){
+  const g=new THREE.Group(),L=400,RIM=20,HC=RIM-1.36,WY=RIM+8;
+  halfTrough(g,L,HC,-1.42,mFeedT);
+  for(const x of[-0.6,L+0.6]) cyl(g,3.25,1.2,mCap,'x',x,HC,0,24);
+  const crG=new THREE.ExtrudeGeometry(arcShape(3.6,3.05,Math.PI,2*Math.PI),{depth:6,bevelEnabled:false,curveSegments:16});
+  const xs=[15,107.5,200,292.5,385];
+  for(const x of xs){
+    cyl(g,1.67,32,mP1,'z',x,1.67,0,12);for(const s of[-1,1])cyl(g,1.95,2.2,mFit,'z',x,1.67,s*17,12);
+    cyl(g,1.95,6.4,mFit,'z',x,1.67,0,12);cyl(g,1.95,3.2,mFit,null,x,4.27,0,12);
+    cyl(g,1.67,HC-6.1-5.87,mP1,null,x,(HC-6.1+5.87)/2,0,12);cyl(g,2.1,2.5,mFit,null,x,HC-4.85,0,12);
+    const c=sh(new THREE.Mesh(crG,mFit));c.rotation.y=Math.PI/2;c.position.set(x-3,HC,0);g.add(c);}
+  for(const x of[15,385]){cyl(g,.22,WY-(HC-3.3),mWire,null,x,(WY+HC-3.3)/2,-3.9,6);cyl(g,.22,3.9,mWire,'z',x,WY,-1.95,6);}
+  cyl(g,.08,370,mWire,'x',200,WY,0,4);
+  g.scale.setScalar(0.01);return g;}
+
+// ===== tank on 120 cm stand (cm); inlet faces +x, outlet faces -x =====
+const TB=132, TFULL=110, TOUT=8, LPC=Math.PI*44*44/1000;
+let tankWater, tankFloat, tankArm;
+function makeTank(){
+  const g=new THREE.Group(),IY=TB+118,OY=TB+113,EY=TB+8,DY=TB+3;
+  for(const x of[-40,40])for(const z of[-40,40]) bx(g,36,120,36,mBlk,x,60,z);
+  bx(g,120,12,120,mConc,0,126,0);
+  const prof=[[0,0],[41,0],[44,3],[44,108],[43.4,116],[40,121],[30,124.5],[21,125.5],[0,125.5]].map(([r,y])=>new THREE.Vector2(r,y));
+  const tk=sh(new THREE.Mesh(new THREE.LatheGeometry(prof,48),mTank));tk.position.y=TB;g.add(tk);
+  for(const y of[18,38,58,78,98]){const t=sh(new THREE.Mesh(new THREE.TorusGeometry(44.2,.9,6,48),mTank));t.rotation.x=Math.PI/2;t.position.y=TB+y;g.add(t);}
+  cyl(g,20,5,P(0x24496F),null,0,TB+128,0,32);
+  tankWater=new THREE.Mesh(new THREE.CylinderGeometry(43.3,43.3,1,40),mWat);g.add(tankWater);
+  cyl(g,2.2,9,mBrass,'x',38.5,IY,0,12);
+  tankArm=sh(new THREE.Mesh(new THREE.CylinderGeometry(.35,.35,1,6),mBrass));g.add(tankArm);
+  tankFloat=sh(new THREE.Mesh(new THREE.SphereGeometry(6.5,18,12),mWhite));g.add(tankFloat);
+  // supply from east (meter at x=330)
+  pipe(g,[[330,30,0],[66,30,0],[66,IY,0],[44,IY,0]],1.07,mBlue);ballValve(g,160,30,0,'x',1.07);
+  bx(g,18,14,10,P(0x5A6168),332,30,0);
+  // overflow north to gravel pit
+  pipe(g,[[0,OY,-43.5],[0,OY,-68],[0,12,-68],[0,6,-76]],1.67,mP1);
+  const pit=new THREE.Mesh(new THREE.CylinderGeometry(22,22,3,20),mConc);pit.position.set(0,1.4,-82);g.add(pit);
+  // outlet west
+  pipe(g,[[-43.5,EY,0],[-72,EY,0],[-72,3,0]],1.34,mP1);ballValve(g,-54,EY,0,'x',1.34);cyl(g,2.4,4,mFit,'x',-64,EY,0,6);
+  // drain south
+  pipe(g,[[0,DY,43.5],[0,DY,70],[0,DY-8,78]],1.34,mP1);ballValve(g,0,DY,58,'z',1.34);
+  // sight gauge
+  const a=Math.PI*0.75,sx=Math.cos(a)*48.5,sz=Math.sin(a)*48.5;
+  const tube=new THREE.Mesh(new THREE.CylinderGeometry(1,1,113,10,1,true),mCup);tube.position.set(sx,EY+56.5,sz);g.add(tube);
+  g.userData.gauge={sx,sz,EY};
+  g.scale.setScalar(0.01);return g;}
+
+// ===== place everything (metres) =====
+const sysG=new THREE.Group();scene.add(sysG);
+const TANK=new THREE.Vector3(8.2,0,-5.8);
+const tankG=makeTank();tankG.position.copy(TANK);sysG.add(tankG);
+const gaugeW=new THREE.Mesh(new THREE.CylinderGeometry(.7,.7,1,8),P(0x3D8FD8));tankG.add(gaugeW);
+const WT=[]; // water troughs
+for(const s of[-1,1]) for(const x0 of[-5.4,0.6]){const t=makeWaterTrough();t.position.set(x0,0,s*4.23);sysG.add(t);WT.push({x0,s,vx:x0+4.871});}
+for(const s of[-1,1]) for(const xc of[-3,3]) for(const d of[1.4,2.6]){const f=makeFeeder();f.position.set(xc-2,0,s*(4-d));sysG.add(f);}
+
+// main ¾" + branches ½" (world metres)
+const R34=0.0134,R12=0.0107,GY=0.03, XT=7.0, ZM=4.5;
+const ox=TANK.x-0.72;
+pipe(sysG,[[ox,GY,TANK.z],[XT,GY,TANK.z],[XT,GY,-ZM]],R34,mP1);
+const ysG=new THREE.Group();ysG.position.set(XT,GY,-5.35);sysG.add(ysG);cyl(ysG,.026,.09,mBrass,'z',0,0,0,12);const ysb=cyl(ysG,.018,.08,mBrass,null,0,-.02,.01,10);ysb.rotation.x=.75;
+ballValve(sysG,XT,GY,-5.05,'z',R34);
+pipe(sysG,[[XT,GY,-ZM],[-0.45,GY,-ZM]],R34,mP1);
+pipe(sysG,[[XT,GY,-ZM],[XT,GY,ZM],[-0.45,GY,ZM]],R34,mP1);
+for(const s of[-1,1]){cyl(sysG,.018,.03,P(0xE0B33A),'x',-0.465,GY,s*ZM,10);}
+const branchPaths=[];
+for(const w of WT){const bxp=w.vx+0.14, z1=w.s*4.23, z2=w.s*ZM;
+  pipe(sysG,[[bxp,GY,z2],[bxp,GY,z1],[bxp,0.446,z1]],R12,mBlue);
+  const e=sh(new THREE.Mesh(new THREE.SphereGeometry(R12*1.3,10,8),mFit));e.position.set(bxp,0.446,z1);sysG.add(e);
+  ballValve(sysG,bxp,0.20,z1,'x',R12);
+  const tee=sh(new THREE.Mesh(new THREE.SphereGeometry(R34*1.6,10,8),mFit));tee.position.set(bxp,GY,z2);sysG.add(tee);
+  branchPaths.push([[bxp,GY,z2],[bxp,GY,z1],[bxp,0.446,z1],[w.vx+0.02,0.446,z1],[w.vx,0.426,z1],[w.vx,0.31,z1]]);}
+
+// ===== flow dots =====
+const tk=(x,y,z)=>[TANK.x+x/100,y/100,TANK.z+z/100];
+const paths=[
+  [tk(330,30,0),tk(66,30,0),tk(66,TB+118,0),tk(40,TB+118,0)],
+  [tk(-44,TB+8,0),tk(-72,TB+8,0),tk(-72,3,0),[XT,GY,TANK.z],[XT,GY,-ZM],[-0.39,GY,-ZM]],
+  [[XT,GY,-ZM],[XT,GY,ZM],[-0.39,GY,ZM]],
+  ...branchPaths];
+const flowG=new THREE.Group();sysG.add(flowG);
+const dots=[];const SPACE=0.35;
+for(const p of paths){const pts=p.map(a=>new THREE.Vector3(...a));const segs=[];let tot=0;
+  for(let i=0;i<pts.length-1;i++){const l=pts[i].distanceTo(pts[i+1]);segs.push({a:pts[i],b:pts[i+1],l,s:tot});tot+=l;}
+  const n=Math.max(2,Math.floor(tot/SPACE));
+  const im=new THREE.InstancedMesh(new THREE.SphereGeometry(0.022,8,6),new THREE.MeshBasicMaterial({color:0x37B3FF}),n);flowG.add(im);
+  dots.push({segs,tot,n,im});}
+const dm2=new THREE.Object3D();
+function updDots(t){for(const d of dots){for(let i=0;i<d.n;i++){let s=((i*SPACE)+t*0.5)%d.tot;let sg=d.segs[d.segs.length-1];
+  for(const q of d.segs){if(s<=q.s+q.l){sg=q;break;}}const f=(s-sg.s)/sg.l;dm2.position.lerpVectors(sg.a,sg.b,f);dm2.updateMatrix();d.im.setMatrixAt(i,dm2.matrix);}
+  d.im.instanceMatrix.needsUpdate=true;}}
+
+// ===== tank level / pressure =====
+const VALVE_IN=34.6;
+function setLevel(p){const lv=TOUT+(TFULL-TOUT)*p/100;
+  tankWater.scale.y=lv;tankWater.position.y=TB+lv/2;
+  const {sx,sz,EY}=tankG.userData.gauge;gaugeW.scale.y=Math.max(.3,lv-TOUT);gaugeW.position.set(sx,EY+Math.max(.3,lv-TOUT)/2,sz);
+  const piv=new THREE.Vector3(34.5,TB+117,0),by=Math.min(piv.y-1,Math.max(TB+lv+1.5,piv.y-24)),dx=Math.sqrt(Math.max(1,27*27-(piv.y-by)**2));
+  tankFloat.position.set(piv.x-dx,by,0);rodTo(tankArm,piv,tankFloat.position.clone());
+  const head=(TB+lv-VALVE_IN)/100, mpa=head*0.00981, L=lv*LPC, days=(lv-TOUT)*LPC/170;
+  $('hL').textContent=Math.round(L)+' ล.';$('hH').textContent=head.toFixed(2)+' ม.';$('hP').textContent=mpa.toFixed(3)+' MPa';
+  $('hD').textContent=days.toFixed(1)+' วัน';const ok=mpa>=0.00999;
+  $('hS').className='st'+(ok?'':' bad');$('hS').lastElementChild.textContent=ok?'ผ่านสเปกวาล์ว (≥0.010)':'ต่ำกว่าสเปกวาล์ว';}
+$('lvl').oninput=e=>setLevel(+e.target.value);setLevel(100);
+
+// ===== labels =====
+const labelDefs=[
+  ['ล็อก A',[-3,1.0,-2],1],['ล็อก B',[3,1.0,-2],1],['ล็อก C',[-3,1.0,2],1],['ล็อก D',[3,1.0,2],1],
+  ['ถังสำรองน้ำ 700 ล.',[TANK.x,2.3,TANK.z],1],['มิเตอร์ประปา',[TANK.x+3.32,0.45,TANK.z],0],
+  ['กรอง Y + วาล์วเมน',[XT,0.15,-5.2],0],['ท่อเมน ¾″',[3,0.12,-ZM],0],['ท่อเมน ¾″',[3,0.12,ZM],0],
+  ['รางน้ำ 4.80',[-3,0.38,-4.23],0],['วาล์วมินิ + ถ้วยพักน้ำ',[5.47,0.55,-4.23],0],['บอลวาล์ว ½″ ล็อก B',[5.61,0.25,-4.3],0],
+  ['รางอาหาร 4.00',[3,0.3,1.4],0],['หลุมน้ำล้น',[TANK.x,0.1,TANK.z-0.82],0]];
+const tagBox=$('tags');
+const tags=labelDefs.map(([t,p,major])=>{const el=document.createElement('div');el.className='tag'+(major?' lot':'');el.textContent=t;tagBox.appendChild(el);return {el,p:new THREE.Vector3(...p),major};});
+
+// ===== camera & UI =====
+const target=new THREE.Vector3(1.5,1,-0.5);const view={theta:0.75,phi:1.05,r:24};
+function place(){view.phi=Math.min(1.52,Math.max(0.03,view.phi));view.r=Math.min(60,Math.max(0.6,view.r));
+  camera.position.set(target.x+view.r*Math.sin(view.phi)*Math.sin(view.theta),target.y+view.r*Math.cos(view.phi),target.z+view.r*Math.sin(view.phi)*Math.cos(view.theta));
+  camera.near=Math.max(0.01,view.r/200);camera.updateProjectionMatrix();camera.lookAt(target);}
+const V={all:[[1.5,1,-0.5],{theta:0.75,phi:1.05,r:24}],top:[[1.2,0,-0.6],{theta:0,phi:0.04,r:22}],
+  tank:[[7.4,1.2,-5.2],{theta:1.0,phi:1.2,r:6}],valve:[[5.5,0.3,-4.3],{theta:2.6,phi:1.1,r:1.3}],lot:[[3,0.4,2],{theta:0.5,phi:0.75,r:6.5}]};
+function setView(k){target.set(...V[k][0]);Object.assign(view,V[k][1]);
+  if(k==='top'||k==='lot')setRoof('rOff');if(k==='tank')setTankClear(true);place();
+  for(const [id,v] of [['vAll','all'],['vTop','top'],['vTank','tank'],['vValve','valve'],['vLot','lot']])$(id).setAttribute('aria-pressed',String(v===k));}
+const pts2=new Map();let pinch=0;
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);pts2.set(e.pointerId,{x:e.clientX,y:e.clientY});});
+canvas.addEventListener('pointermove',e=>{if(!pts2.has(e.pointerId))return;const p=pts2.get(e.pointerId);
+  if(pts2.size===1){view.theta-=(e.clientX-p.x)*0.008;view.phi-=(e.clientY-p.y)*0.006;}
+  p.x=e.clientX;p.y=e.clientY;
+  if(pts2.size===2){const [a,b]=[...pts2.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch)view.r*=pinch/d;pinch=d;}
+  place();});
+const up=e=>{pts2.delete(e.pointerId);if(pts2.size<2)pinch=0;};
+canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);
+canvas.addEventListener('wheel',e=>{e.preventDefault();view.r*=Math.exp(e.deltaY*0.001);place();},{passive:false});
+function setRoof(id){roof.visible=id!=='rOff';mRoof.opacity=id==='rClear'?0.28:1;mRoof.depthWrite=id==='rSolid';
+  ['rSolid','rClear','rOff'].forEach(i=>$(i).setAttribute('aria-pressed',String(i===id)));}
+let tankClear=false;
+function setTankClear(v){tankClear=v;mTank.transparent=v;mTank.opacity=v?.25:1;mTank.depthWrite=!v;mTank.needsUpdate=true;$('tTank').setAttribute('aria-pressed',String(v));}
+for(const id of['rSolid','rClear','rOff'])$(id).onclick=()=>setRoof(id);
+for(const [id,k] of [['vAll','all'],['vTop','top'],['vTank','tank'],['vValve','valve'],['vLot','lot']])$(id).onclick=()=>setView(k);
+const tog=(id,obj)=>{$(id).onclick=e=>{obj.visible=!obj.visible;e.currentTarget.setAttribute('aria-pressed',String(obj.visible));};};
+tog('tFlow',flowG);tog('tMesh',meshGroup);tog('tHens',henGroup);
+$('tTank').onclick=()=>setTankClear(!tankClear);
+const info=$('info'),ti=$('tInfo');
+if(matchMedia('(max-width:900px)').matches){info.hidden=true;ti.setAttribute('aria-pressed','false');}
+ti.onclick=()=>{info.hidden=!info.hidden;ti.setAttribute('aria-pressed',String(!info.hidden));};
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(stage);resize();place();
+const vv=new THREE.Vector3();const t0=performance.now();
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function loop(now){if(flowG.visible)updDots(reduce?0:(now-t0)/1000);
+  renderer.render(scene,camera);
+  const w=stage.clientWidth,h=stage.clientHeight;
+  for(const t of tags){vv.copy(t.p).project(camera);
+    t.el.hidden=vv.z>1||Math.abs(vv.x)>0.97||Math.abs(vv.y)>0.97||(!t.major&&view.r>14);
+    t.el.style.transform=`translate(${(vv.x+1)/2*w}px,${(1-vv.y)/2*h}px) translate(-50%,-50%)`;}
+  requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+
+})();
+</script>
+
+</body></html>
