@@ -1,0 +1,371 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ถังสำรองน้ำ 700 ลิตร 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one-screen viewer — toolbar band, 3D stage with live simulation readout, spec panel on the right */
+:root{
+  --bg:#EDF1F2; --panel:#FFFFFF; --ink:#1C2A34; --muted:#63717B; --rule:#D3DADD;
+  --accent:#246E9E; --chip:#E1E7EA; --sky:#DCE6EB; --ok:#2E8B57; --warn:#C0661E; --bad:#B23A32;
+  --f-disp:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11171B; --panel:#182027; --ink:#E3E9EC; --muted:#8996A0; --rule:#29333B;
+  --accent:#5BAAE0; --chip:#212A31; --sky:#1A242B; --ok:#5CC08A; --warn:#E39A55; --bad:#E0726A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11171B; --panel:#182027; --ink:#E3E9EC; --muted:#8996A0; --rule:#29333B;
+  --accent:#5BAAE0; --chip:#212A31; --sky:#1A242B; --ok:#5CC08A; --warn:#E39A55; --bad:#E0726A; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:14px/1.55 var(--f-body);display:flex;flex-direction:column;overflow:hidden}
+[hidden]{display:none!important}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:10px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:var(--panel);border-bottom:1px solid var(--rule)}
+h1{font-family:var(--f-disp);font-weight:700;font-size:19px;margin:0;line-height:1.2}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.grp{display:flex;gap:2px;background:var(--chip);border-radius:7px;padding:2px;align-items:center}
+.grp .lab{font-size:11px;color:var(--muted);padding:0 6px 0 8px}
+button{font:500 13px var(--f-body);color:var(--ink);background:transparent;border:0;border-radius:5px;padding:5px 9px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.18);color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.main{flex:1;min-height:0;display:flex;position:relative}
+.stage{position:relative;flex:1;min-width:0;overflow:hidden}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+.tag{position:absolute;left:0;top:0;pointer-events:none;display:flex;align-items:center;gap:5px;font:600 12px var(--f-disp);color:var(--ink);white-space:nowrap}
+.tag b{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 4px;border-radius:10px;background:var(--accent);color:#fff;font:600 11px var(--f-mono)}
+.tag span{background:var(--panel);border:1px solid var(--rule);border-radius:5px;padding:1px 6px}
+.stage.compact .tag span{display:none}
+.hud{position:absolute;left:12px;top:12px;display:grid;gap:8px;max-width:calc(100% - 24px)}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+.pill{background:var(--panel);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;font-size:12.5px;font-variant-numeric:tabular-nums;display:inline-flex;gap:6px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.pill.open .dot{background:var(--accent)} .pill.closed .dot{background:var(--ok)}
+.pill.low{border-color:var(--warn);color:var(--warn)} .pill.out{border-color:var(--bad);color:var(--bad)}
+.gauge{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:8px 10px;width:220px;font-size:12px}
+.gauge .bar2{height:8px;border-radius:4px;background:var(--chip);overflow:hidden;margin-top:6px}
+.gauge .fill{height:100%;background:var(--accent);width:100%}
+.gauge .big{font:600 20px var(--f-disp)}
+.hint{position:absolute;right:12px;bottom:10px;font-size:12px;color:var(--muted)}
+aside{width:370px;flex:none;overflow-y:auto;background:var(--panel);border-left:1px solid var(--rule);
+  padding-block:16px 32px;padding-left:18px;padding-right:max(18px,env(safe-area-inset-right,0px));display:grid;gap:20px;align-content:start}
+aside h2{font-family:var(--f-disp);font-weight:600;font-size:15px;margin:0 0 8px;display:flex;gap:8px;align-items:baseline}
+aside h2 .no{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+aside p{margin:0 0 6px}
+aside ol,aside ul{margin:0;padding-left:18px;display:grid;gap:4px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{font:500 11px var(--f-mono);color:var(--muted);text-align:left;padding:4px 0;border-bottom:1px solid var(--rule)}
+th+th{text-align:right}
+td{padding:5px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td+td{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;padding-left:10px;white-space:nowrap}
+.parts{list-style:none;padding:0}
+.parts li{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start}
+.parts b{display:inline-grid;place-items:center;min-width:22px;height:20px;border-radius:10px;background:var(--accent);color:#fff;font:600 11px var(--f-mono);margin-top:1px}
+.parts small{display:block;color:var(--muted);font-size:12px}
+.note{font-size:12.5px;color:var(--muted);border-left:2px solid var(--warn);padding-left:10px;margin:8px 0 0}
+@media (max-width:640px){.tools{margin-left:0}.hint{display:none}.gauge{width:180px}}
+@media (max-width:900px){aside{position:absolute;inset:0;width:auto;border-left:0;z-index:5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+</style>
+
+<div class="bar">
+  <h1>ถังสำรองน้ำ 700 ลิตร</h1>
+  <div class="tools">
+    <div class="grp" role="group" aria-label="น้ำประปา"><span class="lab">ประปา</span>
+      <button id="sOn" aria-pressed="true">ไหลปกติ</button><button id="sOff" aria-pressed="false">ไม่ไหล</button>
+    </div>
+    <div class="grp" role="group" aria-label="อัตราใช้น้ำ"><span class="lab">ใช้น้ำ</span>
+      <button id="dN" aria-pressed="true">ปกติ 110</button><button id="dH" aria-pressed="false">ร้อน 170</button>
+    </div>
+    <div class="grp" role="group" aria-label="ความเร็วจำลอง"><span class="lab">เวลา</span>
+      <button id="x1" aria-pressed="false">1 ชม./วิ</button><button id="x6" aria-pressed="true">6 ชม./วิ</button>
+    </div>
+    <div class="grp" role="group" aria-label="มุมมอง">
+      <button id="vAll" aria-pressed="true">ภาพรวม</button><button id="vFloat" aria-pressed="false">ลูกลอย</button><button id="vOut" aria-pressed="false">ทางออก</button>
+    </div>
+    <div class="grp">
+      <button id="tClear" aria-pressed="false">ถังโปร่ง</button>
+      <button id="bReset">เติมเต็ม</button>
+      <button id="tInfo" aria-pressed="true">รายละเอียด</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="stage" id="stage">
+    <canvas id="c" aria-label="โมเดล 3 มิติ ถังสำรองน้ำบนแท่น พร้อมลูกลอยและท่อ"></canvas>
+    <div class="hud">
+      <div class="gauge">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span>น้ำในถัง</span><span class="big"><span id="gL">669</span> ล.</span></div>
+        <div class="bar2"><div class="fill" id="gFill"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;color:var(--muted)"><span>ใช้ได้อีก</span><b id="gDays" style="color:var(--ink)">5.6 วัน</b></div>
+      </div>
+      <div class="row">
+        <span class="pill" id="pFloat"><i class="dot"></i><span id="sFloat">ลูกลอยปิด</span></span>
+        <span class="pill" id="pTime">วันที่ 1 · 00:00</span>
+      </div>
+    </div>
+    <div id="tags"></div>
+    <div class="hint">ลากเพื่อหมุน · ล้อเมาส์/บีบนิ้วเพื่อซูม</div>
+  </div>
+
+  <aside id="info" aria-label="รายละเอียดถังสำรองน้ำ">
+    <section>
+      <h2><span class="no">01</span>คำนวณขนาดถัง</h2>
+      <table>
+        <thead><tr><th>ไก่ 400 ตัว</th><th>ปกติ</th><th>ร้อน</th></tr></thead>
+        <tr><td>น้ำดื่ม ล./ตัว/วัน</td><td>0.25</td><td>0.40</td></tr>
+        <tr><td>น้ำดื่มรวม</td><td>100</td><td>160</td></tr>
+        <tr><td>ล้างราง</td><td>10</td><td>10</td></tr>
+        <tr><td><b>รวม ล./วัน</b></td><td><b>110</b></td><td><b>170</b></td></tr>
+        <tr><td>ใช้ได้ (620 ล.)</td><td>5.6 วัน</td><td>3.6 วัน</td></tr>
+      </table>
+      <p class="note">ถัง 500 ล. ใช้ได้จริงราว 415 ล. เหลือ 2.4 วันในหน้าร้อน จึงเลือก 700 ล. ให้ครอบคลุม 3 วันในทุกฤดู</p>
+    </section>
+    <section>
+      <h2><span class="no">02</span>ระดับในถัง</h2>
+      <table>
+        <tr><td>ถัง PE Ø 88 สูง 125</td><td>700 ล.</td></tr>
+        <tr><td>ท่อน้ำเข้า (ลูกลอย)</td><td>118 ซม.</td></tr>
+        <tr><td>ท่อน้ำล้น</td><td>113 ซม.</td></tr>
+        <tr><td>ลูกลอยตัดน้ำ (เต็ม)</td><td>110 ซม.</td></tr>
+        <tr><td>ทางออกไปราง</td><td>8 ซม.</td></tr>
+        <tr><td>น้ำใช้ได้ 8–110 ซม.</td><td>~620 ล.</td></tr>
+        <tr><td>1 ซม. ในถัง</td><td>~6.1 ล.</td></tr>
+      </table>
+    </section>
+    <section>
+      <h2><span class="no">03</span>ชิ้นส่วน</h2>
+      <ul class="parts">
+        <li><b>1</b><div>ถัง PE บนดิน 700 ลิตร<small>Ø 88 สูง 125 ซม. สีทึบแสง กันตะไคร่</small></div></li>
+        <li><b>2</b><div>ฝาถัง + ช่องระบายอากาศ</div></li>
+        <li><b>3</b><div>วาล์วลูกลอยแบบก้าน ¾″<small>ติดในถังที่ท่อน้ำเข้า ปิดน้ำที่ 110 ซม.</small></div></li>
+        <li><b>4</b><div>ท่อประปาเข้า PVC ½″<small>ต่อจากท่อประปาเดิม เดินขึ้นข้างแท่น</small></div></li>
+        <li><b>5</b><div>บอลวาล์วประปา ½″<small>ปิดเพื่อซ่อมลูกลอย</small></div></li>
+        <li><b>6</b><div>ท่อน้ำล้น 1″<small>ระบายลงหลุมกรวด กันน้ำล้นฝาถังถ้าลูกลอยเสีย</small></div></li>
+        <li><b>7</b><div>ทางออก ¾″ + บอลวาล์ว + ข้อต่อยูเนียน</div></li>
+        <li><b>8</b><div>กรองตะกอนแบบ Y ¾″<small>กันตะกอนอุดวาล์วรางน้ำ</small></div></li>
+        <li><b>9</b><div>ท่อ ¾″ ไปรางน้ำไก่<small>ปิดปลายไว้ก่อน ต่อเข้าระบบรางภายหลัง</small></div></li>
+        <li><b>10</b><div>วาล์วระบายตะกอน ¾″<small>ก้นถัง เปิดล้างถังทุก 3–6 เดือน</small></div></li>
+        <li><b>11</b><div>สายวัดระดับน้ำ<small>สายยางใสข้างถัง ดูระดับได้ไม่ต้องเปิดฝา</small></div></li>
+        <li><b>12</b><div>แท่นวางถัง คสล. สูง 100 ซม.<small>เสาบล็อกกรอกปูน 4 ต้น + พื้น คสล. 120 × 120 หนา 12</small></div></li>
+      </ul>
+    </section>
+    <section>
+      <h2><span class="no">04</span>แรงดันไปราง</h2>
+      <p>ก้นถังสูงจากพื้น 112 ซม. ท่อน้ำเข้าที่รางสูง 44.6 ซม. ได้ความสูงน้ำ 0.75–1.77 ม. (0.07–0.17 บาร์) น้ำไหลได้ด้วยแรงโน้มถ่วง</p>
+      <p class="note">วาล์วลูกลอยมินิบางรุ่นต้องการแรงดันขั้นต่ำ ~0.02 MPa (2 ม.) ถ้าน้ำไหลเข้ารางช้า ให้ยกแท่นเป็น 150–200 ซม. หรือเพิ่มปั๊มอัตโนมัติขนาดเล็กหลังกรอง</p>
+    </section>
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const TB=112, TR=44, TH=125, FULL=110, OPEN_AT=108.5, OUT=8, LPC=Math.PI*TR*TR/1000; // litres per cm
+const stage=$('stage'), canvas=$('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(38,1,1,6000);
+function applyTheme(){scene.background=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--sky').trim()||'#DCE6EB');}
+applyTheme();
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme)}catch(e){}
+new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+scene.add(new THREE.HemisphereLight(0xffffff,0x6f6a58,0.75));
+const sun=new THREE.DirectionalLight(0xffffff,0.85);sun.position.set(260,520,320);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-400,right:400,top:400,bottom:-400,near:10,far:1600});scene.add(sun);
+
+const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.6,metalness:0},o));
+function tex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);return t;}
+const blockTex=tex(128,128,(g,w,h)=>{g.fillStyle='#A9ADA6';g.fillRect(0,0,w,h);g.strokeStyle='#8A8E87';g.lineWidth=3;
+  for(let r=0;r<4;r++){g.beginPath();g.moveTo(0,r*32);g.lineTo(w,r*32);g.stroke();const o=r%2?32:0;for(let x=o;x<w+64;x+=64){g.beginPath();g.moveTo(x,r*32);g.lineTo(x,r*32+32);g.stroke();}}},[1,3]);
+const groundTex=tex(128,128,(g,w,h)=>{g.fillStyle='#8E9A6B';g.fillRect(0,0,w,h);for(let i=0;i<900;i++){g.fillStyle=Math.random()<.5?'rgba(70,85,50,.35)':'rgba(170,175,120,.3)';g.fillRect(Math.random()*w,Math.random()*h,2,2);}},[40,40]);
+const gravelTex=tex(64,64,(g,w,h)=>{g.fillStyle='#9A958C';g.fillRect(0,0,w,h);for(let i=0;i<220;i++){g.fillStyle=['#7D786F','#B9B4AA','#6E6A63'][i%3];g.beginPath();g.arc(Math.random()*w,Math.random()*h,1.5+Math.random()*2,0,7);g.fill();}},[2,2]);
+
+const mTank=M(0x2F5F8F,{roughness:.55,side:THREE.DoubleSide});
+const mConc=M(0xBEBDB6,{roughness:.9}), mBlock=M(0xffffff,{map:blockTex,roughness:.9});
+const mPVC=M(0xE7E9E8,{roughness:.35}), mBlue=M(0x2F7FD0,{roughness:.35}), mFit=M(0xD4D7D5,{roughness:.4});
+const mRed=M(0xC8302B,{roughness:.45}), mBrass=M(0xC2A25A,{metalness:.6,roughness:.35}), mDark=M(0x3E4349,{roughness:.5});
+const mBall=M(0xF2F2EE,{roughness:.3}), mClear=new THREE.MeshStandardMaterial({color:0xDFF3FF,transparent:true,opacity:.35,roughness:.1,depthWrite:false});
+const mWater=new THREE.MeshStandardMaterial({color:0x58A8DE,transparent:true,opacity:.55,roughness:.1,depthWrite:false});
+const mStream=new THREE.MeshStandardMaterial({color:0x8CC8F0,transparent:true,opacity:.75,roughness:.1});
+const sh=m=>{m.castShadow=true;m.receiveShadow=true;return m;};
+const box=(w,h,d,mat,x,y,z)=>{const m=sh(new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat));m.position.set(x,y,z);scene.add(m);return m;};
+const UP=new THREE.Vector3(0,1,0);
+function rodTo(m,a,b){const d=new THREE.Vector3().subVectors(b,a);m.position.copy(a).add(b).multiplyScalar(.5);m.scale.set(1,Math.max(d.length(),.01),1);m.quaternion.setFromUnitVectors(UP,d.normalize());}
+function pipe(pts,r,mat){for(let i=0;i<pts.length-1;i++){const m=sh(new THREE.Mesh(new THREE.CylinderGeometry(r,r,1,16),mat));rodTo(m,new THREE.Vector3(...pts[i]),new THREE.Vector3(...pts[i+1]));scene.add(m);}
+  for(let i=1;i<pts.length-1;i++){const e=sh(new THREE.Mesh(new THREE.SphereGeometry(r*1.3,14,10),mFit));e.position.set(...pts[i]);scene.add(e);}}
+function ballValve(x,y,z,axis,r){const g=new THREE.Group();g.position.set(x,y,z);scene.add(g);
+  const b=sh(new THREE.Mesh(new THREE.CylinderGeometry(r*1.6,r*1.6,r*5,16),mBrass));if(axis==='x')b.rotation.z=Math.PI/2;if(axis==='z')b.rotation.x=Math.PI/2;g.add(b);
+  const st=sh(new THREE.Mesh(new THREE.CylinderGeometry(r*.4,r*.4,r*2.2,8),mDark));st.position.y=r*2;g.add(st);
+  const h=sh(new THREE.Mesh(new THREE.BoxGeometry(axis==='x'?r*6:r*1.2,r*.6,axis==='x'?r*1.2:r*6),mRed));h.position.y=r*3;if(axis!=='x'&&axis!=='z')h.rotation.y=0;g.add(h);return g;}
+
+// ground
+const gnd=new THREE.Mesh(new THREE.PlaneGeometry(4000,4000),M(0xffffff,{map:groundTex,roughness:1}));gnd.rotation.x=-Math.PI/2;gnd.receiveShadow=true;scene.add(gnd);
+
+// stand: 4 block piers + RC slab
+for(const x of[-40,40]) for(const z of[-40,40]){
+  const p=box(36,100,36,mBlock,x,50,z);
+  box(56,8,56,mConc,x,-3,z).receiveShadow=true;}
+box(120,12,120,mConc,0,106,0);
+
+// tank (lathe)
+const prof=[[0,0],[41,0],[44,3],[44,108],[43.4,116],[40,121],[30,124.5],[21,125.5],[0,125.5]].map(([r,y])=>new THREE.Vector2(r,y));
+const tankG=new THREE.LatheGeometry(prof,64);
+const tank=sh(new THREE.Mesh(tankG,mTank));tank.position.y=TB;scene.add(tank);
+const ribs=[];for(const y of[18,38,58,78,98]){const t=sh(new THREE.Mesh(new THREE.TorusGeometry(44.2,0.9,8,64),mTank));t.rotation.x=Math.PI/2;t.position.y=TB+y;scene.add(t);ribs.push(t);}
+const lid=sh(new THREE.Mesh(new THREE.CylinderGeometry(20,20.5,5,40),M(0x24496F,{roughness:.5})));lid.position.y=TB+128;scene.add(lid);
+for(let i=0;i<6;i++){const v=new THREE.Mesh(new THREE.BoxGeometry(10,0.6,1.2),mDark);v.position.set(0,TB+130.8,-6+i*2.4);scene.add(v);}
+// water in tank
+const water=new THREE.Mesh(new THREE.CylinderGeometry(43.3,43.3,1,48),mWater);scene.add(water);
+
+// float valve (inside, inlet on -X at 118)
+const IY=TB+118;
+const fvBody=sh(new THREE.Mesh(new THREE.CylinderGeometry(2.2,2.2,9,16),mBrass));fvBody.rotation.z=Math.PI/2;fvBody.position.set(-38.5,IY,0);scene.add(fvBody);
+const fvOut=sh(new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.2,3.5,12),mBrass));fvOut.position.set(-35.5,IY-3,0);scene.add(fvOut);
+const arm=sh(new THREE.Mesh(new THREE.CylinderGeometry(.35,.35,1,8),mBrass));scene.add(arm);
+const ball=sh(new THREE.Mesh(new THREE.SphereGeometry(6.5,24,18),mBall));scene.add(ball);
+const stream=new THREE.Mesh(new THREE.CylinderGeometry(.6,.9,1,10),mStream);scene.add(stream);
+const PIV=new THREE.Vector3(-34.5,IY-1,0), ARM=27;
+
+// supply ½" from west: existing main -> ball valve -> riser -> inlet
+const R12=1.07, R34=1.34, R1=1.67;
+pipe([[-260,30,0],[-66,30,0],[-66,IY,0],[-44,IY,0]],R12,mBlue);
+ballValve(-160,30,0,'x',R12);
+box(18,14,10,M(0x5A6168),-262,30,0); // existing meter/box
+const inletFlange=sh(new THREE.Mesh(new THREE.CylinderGeometry(3,3,2,16),mFit));inletFlange.rotation.z=Math.PI/2;inletFlange.position.set(-44.5,IY,0);scene.add(inletFlange);
+
+// overflow 1" on -Z at 113, down to gravel pit
+const OY=TB+113;
+pipe([[0,OY,-43.5],[0,OY,-68],[0,12,-68],[0,6,-76]],R1,mPVC);
+const gravel=new THREE.Mesh(new THREE.CylinderGeometry(22,22,3,24),M(0xffffff,{map:gravelTex,roughness:1}));gravel.position.set(0,1.4,-82);gravel.receiveShadow=true;scene.add(gravel);
+
+// outlet ¾" on +X at 8: ball valve, union, down, Y-strainer, run east, capped stub
+const EY=TB+8;
+pipe([[43.5,EY,0],[72,EY,0],[72,30,0],[300,30,0]],R34,mPVC);
+ballValve(54,EY,0,'x',R34);
+const union=sh(new THREE.Mesh(new THREE.CylinderGeometry(2.4,2.4,4,6),mFit));union.rotation.z=Math.PI/2;union.position.set(64,EY,0);scene.add(union);
+const ys=sh(new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,9,16),mBrass));ys.rotation.z=Math.PI/2;ys.position.set(110,30,0);scene.add(ys);
+const ysb=sh(new THREE.Mesh(new THREE.CylinderGeometry(1.8,1.8,8,12),mBrass));ysb.position.set(112,26,0);ysb.rotation.z=0.75;scene.add(ysb);
+ballValve(200,30,0,'x',R34);
+const endCap=sh(new THREE.Mesh(new THREE.CylinderGeometry(1.75,1.75,3,16),M(0xE0B33A,{roughness:.4})));endCap.rotation.z=Math.PI/2;endCap.position.set(301.5,30,0);scene.add(endCap);
+const tagPost=box(1.2,40,1.2,M(0x8B6A44),300,20,6);
+const tagPlate=box(18,10,0.6,M(0xF0C64B),300,44,6);
+// pipe supports
+for(const x of[140,250]){box(4,24,4,mConc,x,12,0);}
+
+// drain ¾" on +Z at 3
+const DY=TB+3;
+pipe([[0,DY,43.5],[0,DY,70],[0,DY-8,78]],R34,mPVC);
+ballValve(0,DY,58,'z',R34);
+
+// sight gauge at 45°: clear tube r .9 outside tank
+const SA=Math.PI/4, SR=48.5, sx=Math.cos(SA)*SR, sz=Math.sin(SA)*SR;
+pipe([[Math.cos(SA)*43.5,EY,Math.sin(SA)*43.5],[sx,EY,sz]],0.9,mFit);
+const tube=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,TH-12,12,1,true),mClear);tube.position.set(sx,EY+(TH-12)/2,sz);scene.add(tube);
+const tubeW=new THREE.Mesh(new THREE.CylinderGeometry(.7,.7,1,10),M(0x3D8FD8,{roughness:.2}));scene.add(tubeW);
+for(const y of[20,60,100]){const c=sh(new THREE.Mesh(new THREE.TorusGeometry(1.3,.25,6,12),mDark));c.rotation.x=Math.PI/2;c.position.set(sx,TB+y,sz);scene.add(c);}
+const tubeCap=sh(new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.2,1.5,10),mFit));tubeCap.position.set(sx,EY+TH-12,sz);scene.add(tubeCap);
+
+// labels
+const labels=[
+  ['1','ถัง PE 700 ลิตร',[30,TB+75,34]],
+  ['2','ฝาถัง',[0,TB+131,0]],
+  ['3','ลูกลอยก้าน ¾″',null],
+  ['4','ท่อประปาเข้า ½″',[-66,TB+60,0]],
+  ['5','บอลวาล์วประปา',[-160,34,0]],
+  ['6','ท่อน้ำล้น 1″',[0,OY-40,-68]],
+  ['7','ทางออก ¾″ + บอลวาล์ว',[54,EY+5,0]],
+  ['8','กรองตะกอน Y',[110,34,0]],
+  ['9','ท่อ ¾″ ไปรางน้ำไก่ (ปิดปลาย)',[300,52,6]],
+  ['10','วาล์วระบายตะกอน',[0,DY+5,60]],
+  ['11','สายวัดระดับ',[sx,TB+90,sz]],
+  ['12','แท่น คสล. สูง 100',[40,60,40]]
+];
+const box2=$('tags');const tagEls=labels.map(([n,t])=>{const el=document.createElement('div');el.className='tag';
+  const b=document.createElement('b');b.textContent=n;const s=document.createElement('span');s.textContent=t;el.append(b,s);box2.appendChild(el);return el;});
+
+// simulation
+let level=FULL, supplyOn=true, daily=110, speed=6, hours=0, open=false, clear=false;
+function setClear(v){clear=v;mTank.transparent=v;mTank.opacity=v?0.22:1;mTank.depthWrite=!v;mTank.needsUpdate=true;$('tClear').setAttribute('aria-pressed',String(v));}
+function step(dt){
+  const h=dt*speed;hours+=h;
+  if(level>OUT) level-=(daily/24)*h/LPC;
+  if(level<OUT-0.5) level=OUT-0.5;
+  if(level>=FULL-0.02) open=false; else if(level<OPEN_AT) open=true;
+  if(supplyOn&&open) level=Math.min(FULL,level+600*h/LPC);
+  // visuals
+  const wl=Math.max(0.3,level);water.scale.y=wl;water.position.set(0,TB+wl/2,0);
+  tubeW.scale.y=Math.max(0.3,level-OUT);tubeW.position.set(sx,EY+Math.max(0.3,level-OUT)/2,sz);
+  const by=Math.min(PIV.y-1,Math.max(TB+level+1.5,PIV.y-24));
+  const dx=Math.sqrt(Math.max(1,ARM*ARM-(PIV.y-by)**2));
+  ball.position.set(PIV.x+dx,by,0);rodTo(arm,PIV,ball.position.clone());
+  const flowing=supplyOn&&open;stream.visible=flowing;
+  if(flowing){rodTo(stream,new THREE.Vector3(-35.5,IY-4.8,0),new THREE.Vector3(-35.5,TB+level,0));mStream.opacity=.6+.2*Math.sin(performance.now()/50);}
+  const L=level*LPC, usable=Math.max(0,(level-OUT)*LPC), days=usable/daily;
+  $('gL').textContent=Math.round(Math.max(0,L));$('gFill').style.width=Math.max(0,Math.min(100,(level-OUT)/(FULL-OUT)*100))+'%';
+  $('gDays').textContent=days<0.05?'น้ำหมด':days.toFixed(1)+' วัน';
+  const pf=$('pFloat');
+  if(level<=OUT){pf.className='pill out';$('sFloat').textContent='น้ำต่ำกว่าทางออก · รางไม่มีน้ำ';}
+  else if(!supplyOn&&open){pf.className='pill low';$('sFloat').textContent='ลูกลอยเปิด · ประปาไม่ไหล';}
+  else{pf.className='pill '+(open?'open':'closed');$('sFloat').textContent=open?'ลูกลอยเปิด · กำลังเติม':'ลูกลอยปิด · น้ำเต็ม';}
+  const d=Math.floor(hours/24)+1,hh=Math.floor(hours%24),mm=Math.floor((hours*60)%60);
+  $('pTime').textContent=`วันที่ ${d} · ${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+}
+
+// camera
+const target=new THREE.Vector3();const view={theta:.7,phi:1.15,r:520};
+function setView(k){
+  if(k==='all'){target.set(30,110,0);Object.assign(view,{theta:.62,phi:1.18,r:560});}
+  if(k==='float'){setClear(true);target.set(-28,TB+108,0);Object.assign(view,{theta:.35,phi:1.25,r:120});}
+  if(k==='out'){target.set(90,70,0);Object.assign(view,{theta:.95,phi:1.12,r:190});}
+  place();for(const [id,v] of [['vAll','all'],['vFloat','float'],['vOut','out']])$(id).setAttribute('aria-pressed',String(v===k));}
+function place(){view.phi=Math.min(1.53,Math.max(0.08,view.phi));view.r=Math.min(1600,Math.max(20,view.r));
+  camera.position.set(target.x+view.r*Math.sin(view.phi)*Math.sin(view.theta),target.y+view.r*Math.cos(view.phi),target.z+view.r*Math.sin(view.phi)*Math.cos(view.theta));
+  camera.lookAt(target);stage.classList.toggle('compact',view.r>420);}
+const pts=new Map();let pinch=0;
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});});
+canvas.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;const p=pts.get(e.pointerId);
+  if(pts.size===1){view.theta-=(e.clientX-p.x)*0.008;view.phi-=(e.clientY-p.y)*0.006;}
+  p.x=e.clientX;p.y=e.clientY;
+  if(pts.size===2){const [a,b]=[...pts.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch)view.r*=pinch/d;pinch=d;}
+  place();});
+const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=0;};
+canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);
+canvas.addEventListener('wheel',e=>{e.preventDefault();view.r*=Math.exp(e.deltaY*0.001);place();},{passive:false});
+
+const press=(ids,on)=>ids.forEach(i=>$(i).setAttribute('aria-pressed',String(i===on)));
+$('sOn').onclick=()=>{supplyOn=true;press(['sOn','sOff'],'sOn');};
+$('sOff').onclick=()=>{supplyOn=false;press(['sOn','sOff'],'sOff');};
+$('dN').onclick=()=>{daily=110;press(['dN','dH'],'dN');};
+$('dH').onclick=()=>{daily=170;press(['dN','dH'],'dH');};
+$('x1').onclick=()=>{speed=1;press(['x1','x6'],'x1');};
+$('x6').onclick=()=>{speed=6;press(['x1','x6'],'x6');};
+for(const [id,k] of [['vAll','all'],['vFloat','float'],['vOut','out']])$(id).onclick=()=>setView(k);
+$('tClear').onclick=()=>setClear(!clear);
+$('bReset').onclick=()=>{level=FULL;open=false;hours=0;};
+const info=$('info'),ti=$('tInfo');
+if(matchMedia('(max-width:900px)').matches){info.hidden=true;ti.setAttribute('aria-pressed','false');}
+ti.onclick=()=>{info.hidden=!info.hidden;ti.setAttribute('aria-pressed',String(!info.hidden));};
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(stage);
+setView('all');resize();step(0);
+
+const v=new THREE.Vector3();let last=performance.now();
+function loop(now){const dt=Math.min(0.05,(now-last)/1000);last=now;step(dt);renderer.render(scene,camera);
+  const w=stage.clientWidth,h=stage.clientHeight;
+  labels.forEach(([n,t,p],i)=>{const el=tagEls[i];const pos=p?v.set(...p):v.copy(ball.position).add(new THREE.Vector3(0,8,0));
+    pos.project(camera);el.hidden=pos.z>1||Math.abs(pos.x)>0.98||Math.abs(pos.y)>0.98||(n==='3'&&!clear);
+    el.style.transform=`translate(${(pos.x+1)/2*w}px,${(1-pos.y)/2*h}px) translate(-10px,-50%)`;});
+  requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>

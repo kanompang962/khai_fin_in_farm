@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --panel: rgba(20, 28, 38, 0.86);
+  --panel-solid: #141c26;
+  --line: rgba(255, 255, 255, 0.09);
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #898781;
+  --accent: #f5b942;
+  --good: #0ca30c;
+  --bad: #e66767;
+  --income: #3987e5;
+  --expense: #d95926;
+  --profit: #199e70;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: #0f1a33;
+  color: var(--ink);
+  font-family: 'IBM Plex Sans Thai', system-ui, sans-serif;
+  overscroll-behavior: none;
+}
+
+@layer components {
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-1 rounded-lg px-2.5 py-1.5 text-sm font-medium transition-colors;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+  }
+  .btn-on {
+    background: var(--accent) !important;
+    color: #1d1505 !important;
+    border-color: transparent;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #1d1505;
+    border-color: transparent;
+  }
+  .btn-primary:hover {
+    background: #ffcb5c;
+  }
+  .btn-danger {
+    color: #ffb4b4;
+  }
+  .btn-sm {
+    @apply px-2 py-1 text-xs;
+  }
+  .tab {
+    @apply flex-1 rounded-md px-2 py-1.5 text-xs font-medium;
+    color: var(--ink-2);
+  }
+  .tab-on {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--ink);
+  }
+  .field {
+    @apply w-full rounded-md px-2 py-1 text-sm outline-none;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .field:focus {
+    border-color: var(--accent);
+  }
+  .muted {
+    color: var(--muted);
+  }
+  .ink2 {
+    color: var(--ink-2);
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+  .scroll-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 3px;
+  }
+}
+
+/* ---------- ป้ายใน 3D ---------- */
+.label3d {
+  background: rgba(17, 24, 33, 0.82);
+  color: #f6f4ee;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 13px;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-align: center;
+  user-select: none;
+  font-family: 'IBM Plex Sans Thai', system-ui, sans-serif;
+}
+.label3d-small {
+  font-size: 11px;
+  padding: 2px 6px;
+  opacity: 0.9;
+}
+.label3d-title {
+  font-weight: 600;
+}
+.label3d-body {
+  color: #cfd6de;
+  font-size: 11.5px;
+}
+.label3d-person {
+  font-size: 12px;
+  padding: 2px 7px;
+}
+.bubble3d {
+  background: #1f8f5f;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: 'IBM Plex Sans Thai', system-ui, sans-serif;
+  animation: pop 0.35s ease-out;
+}
+.bubble3d-warn {
+  background: #b33f3f;
+}
+@keyframes pop {
+  from {
+    transform: translateY(6px) scale(0.7);
+    opacity: 0;
+  }
+}
+.store-sign {
+  background: #b8432a;
+  color: #fff7e6;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 4px 16px;
+  border-radius: 6px;
+  border: 3px solid #f5d28a;
+  white-space: nowrap;
+  font-family: 'IBM Plex Sans Thai', system-ui, sans-serif;
+}
+.price-board {
+  background: #23302a;
+  color: #eaf5e4;
+  border: 3px solid #8a6a43;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  min-width: 132px;
+  font-family: 'IBM Plex Sans Thai', system-ui, sans-serif;
+}
+.price-board-title {
+  text-align: center;
+  font-weight: 700;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+  margin-bottom: 2px;
+}
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* ป้ายสถานะพนักงาน */
+.task-badge {
+  --task: #8a8f98;
+  background: rgba(17, 24, 33, 0.92);
+  color: #f6f4ee;
+  border: 2px solid var(--task);
+  border-radius: 10px;
+  padding: 4px 9px 5px;
+  min-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  font-family: 'IBM Plex Sans Thai', system-ui, sans-serif;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  user-select: none;
+}
+.task-badge-name {
+  font-size: 11px;
+  color: #cfd6de;
+  line-height: 1.2;
+}
+.task-badge-task {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--task);
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.35;
+}
+.task-badge-detail {
+  font-size: 11px;
+  color: #cfd6de;
+  line-height: 1.25;
+}
+.task-badge-bar {
+  margin-top: 3px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.task-badge-bar > div {
+  height: 100%;
+  background: var(--task);
+  border-radius: 2px;
+}
+
+/* recharts */
+.recharts-cartesian-grid line {
+  stroke: #2c2c2a;
+}
+.recharts-text {
+  fill: #898781;
+  font-size: 11px;
+}

@@ -1,0 +1,407 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>รางน้ำไก่ PVC 2″ 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one-screen viewer — toolbar band, 3D stage with live status chip, spec panel on the right */
+:root{
+  --bg:#EEF1EC; --panel:#FFFFFF; --ink:#1E2A36; --muted:#66717C; --rule:#D5DAD1;
+  --accent:#2B78AC; --chip:#E4E8E0; --sky:#DDE7EB; --ok:#2E8B57; --flow:#2B78AC;
+  --f-disp:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12181D; --panel:#182027; --ink:#E3E8EB; --muted:#8B97A1; --rule:#2A343C;
+  --accent:#5AA8DB; --chip:#222C34; --sky:#1B252D; --ok:#5CC08A; --flow:#5AA8DB; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12181D; --panel:#182027; --ink:#E3E8EB; --muted:#8B97A1; --rule:#2A343C;
+  --accent:#5AA8DB; --chip:#222C34; --sky:#1B252D; --ok:#5CC08A; --flow:#5AA8DB; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:14px/1.55 var(--f-body);display:flex;flex-direction:column;overflow:hidden}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:10px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:var(--panel);border-bottom:1px solid var(--rule)}
+h1{font-family:var(--f-disp);font-weight:700;font-size:19px;margin:0;line-height:1.2}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.grp{display:flex;gap:2px;background:var(--chip);border-radius:7px;padding:2px;align-items:center}
+.grp .lab{font-size:11px;color:var(--muted);padding:0 6px 0 8px}
+button{font:500 13px var(--f-body);color:var(--ink);background:transparent;border:0;border-radius:5px;padding:5px 10px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.18);color:var(--accent)}
+button.act{background:var(--accent);color:#fff}
+button.act:hover{filter:brightness(1.08)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.main{flex:1;min-height:0;display:flex;position:relative}
+.stage{position:relative;flex:1;min-width:0;overflow:hidden}
+[hidden]{display:none!important}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+.tag{position:absolute;left:0;top:0;pointer-events:none;display:flex;align-items:center;gap:5px;
+  font:600 12px var(--f-disp);color:var(--ink);white-space:nowrap}
+.tag b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font:600 11px var(--f-mono)}
+.tag span{background:var(--panel);border:1px solid var(--rule);border-radius:5px;padding:1px 6px}
+.stage.compact .tag span{display:none}
+.status{position:absolute;left:max(12px,env(safe-area-inset-left,0px));top:12px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 24px)}
+.pill{background:var(--panel);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;font-size:12.5px;display:inline-flex;gap:6px;align-items:center;font-variant-numeric:tabular-nums}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.pill.open .dot{background:var(--flow);box-shadow:0 0 0 3px color-mix(in srgb,var(--flow) 30%,transparent)}
+.pill.closed .dot{background:var(--ok)}
+.hint{position:absolute;right:12px;bottom:10px;font-size:12px;color:var(--muted)}
+aside{width:370px;flex:none;overflow-y:auto;background:var(--panel);border-left:1px solid var(--rule);
+  padding-block:16px 32px;padding-left:18px;padding-right:max(18px,env(safe-area-inset-right,0px));display:grid;gap:20px;align-content:start}
+aside h2{font-family:var(--f-disp);font-weight:600;font-size:15px;margin:0 0 8px;display:flex;gap:8px;align-items:baseline}
+aside h2 .no{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+aside p{margin:0 0 6px}
+aside ol,aside ul{margin:0;padding-left:18px;display:grid;gap:4px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+td{padding:5px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td+td{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;padding-left:10px;white-space:nowrap}
+.parts{list-style:none;padding:0}
+.parts li{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start}
+.parts b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font:600 11px var(--f-mono);margin-top:1px}
+.parts small{display:block;color:var(--muted);font-size:12px}
+.note{font-size:12.5px;color:var(--muted);border-left:2px solid var(--accent);padding-left:10px;margin:8px 0 0}
+@media (max-width:640px){.tools{margin-left:0}.hint{display:none}}
+@media (max-width:900px){aside{position:absolute;inset:0;width:auto;border-left:0;z-index:5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="bar">
+  <h1>รางน้ำไก่ PVC 2″</h1>
+  <div class="tools">
+    <div class="grp" role="group" aria-label="ความยาวราง"><span class="lab">ยาว</span>
+      <button id="len150" aria-pressed="false">1.50</button>
+      <button id="len200" aria-pressed="true">2.00</button>
+      <button id="len480" aria-pressed="false">4.80</button>
+    </div>
+    <div class="grp" role="group" aria-label="มุมมอง">
+      <button id="vAll" aria-pressed="true">ทั้งราง</button>
+      <button id="vValve" aria-pressed="false">วาล์ว</button>
+      <button id="vCut" aria-pressed="false">หน้าตัด</button>
+    </div>
+    <div class="grp">
+      <button id="tExplode" aria-pressed="false">แยกชิ้น</button>
+      <button id="tInfo" aria-pressed="true">รายละเอียด</button>
+    </div>
+    <div class="grp">
+      <button id="bDrink" class="act">ไก่ดื่มน้ำ</button>
+      <button id="bEmpty">เทน้ำออก</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="stage" id="stage">
+    <canvas id="c" aria-label="โมเดล 3 มิติ รางน้ำไก่ PVC 2 นิ้ว พร้อมวาล์วลูกลอย"></canvas>
+    <div class="status">
+      <span class="pill" id="pValve"><i class="dot"></i><span id="sValve">วาล์วปิด</span></span>
+      <span class="pill">ระดับน้ำ <b id="sDepth">3.4</b> ซม.</span>
+      <span class="pill">ในราง <b id="sVol">3.0</b> ลิตร</span>
+    </div>
+    <div id="tags"></div>
+    <div class="hint">ลากเพื่อหมุน · ล้อเมาส์/บีบนิ้วเพื่อซูม</div>
+  </div>
+
+  <aside id="info" aria-label="รายละเอียดรางน้ำ">
+    <section>
+      <h2><span class="no">01</span>ขนาดราง</h2>
+      <table>
+        <tr><td>ท่อ PVC เส้นผ่านศูนย์กลางนอก</td><td>60 มม. (2″)</td></tr>
+        <tr><td>ตัดด้านบนออก</td><td>~35% · 126°</td></tr>
+        <tr><td>ปากรางกว้าง</td><td>~5.4 ซม.</td></tr>
+        <tr><td>ความลึกน้ำที่เหมาะสม</td><td>3–4 ซม.</td></tr>
+        <tr><td>ความจุ ราง 1.50 ม.</td><td>~2.5 ลิตร</td></tr>
+        <tr><td>ความจุ ราง 2.00 ม.</td><td>~3.3 ลิตร</td></tr>
+        <tr><td>ไก่ต่อราง 1 เส้น</td><td>20–30 ตัว</td></tr>
+        <tr><td>รางที่แสดงอยู่</td><td id="sNow">2.00 ม.</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2><span class="no">02</span>ชิ้นส่วน</h2>
+      <p class="note" style="margin:0 0 10px">วาล์วมินิกว้างราว 5 ซม. และต้องจมน้ำจึงจะตัดน้ำได้ ใส่ในรางกว้าง 5.4 ซม. ที่น้ำลึกแค่ 3–4 ซม. ไม่ได้ จึงตั้งไว้ในถ้วยพักน้ำ 4″ ที่ต่อถึงรางด้านล่าง ระดับน้ำในถ้วยกับในรางจึงเท่ากันเสมอ</p>
+      <ul class="parts">
+        <li><b>1</b><div>ท่อ PVC 2″ ตัดครึ่ง<small>ยาว 1.50 หรือ 2.00 ม. ขอบโค้งเข้าด้านในกันน้ำหก</small></div></li>
+        <li><b>2</b><div>วาล์วลูกลอยมินิ ½″ แบบ B<small>น้ำเข้าด้านบน ออกด้านข้าง ลูกลอยอยู่ในตัววาล์ว ไม่มีก้านยื่น</small></div></li>
+        <li><b>3</b><div>ข้อต่อเกลียวใน ½″<small>สำหรับต่อวาล์ว</small></div></li>
+        <li><b>4</b><div>ข้องอ 90° ½″</div></li>
+        <li><b>5</b><div>ท่อ PVC ½″<small>น้ำเข้าจากภายนอกโรงเรือน</small></div></li>
+        <li><b>6</b><div>คลิปล็อกท่อ ½″<small>ยึดท่อน้ำเข้ากับเสาหรือขาตั้ง</small></div></li>
+        <li><b>7</b><div>น้ำยาประสานท่อ PVC / เทปพันเกลียว<small>ไม่แสดงในโมเดล</small></div></li>
+        <li><b>8</b><div>ถ้วยพักน้ำ PVC 4″ + ฝาปิดก้น<small>สูงราว 10 ซม. เจาะรูรับปลายราง 2″ ด้านล่าง</small></div></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="no">03</span>ขั้นตอนประกอบ</h2>
+      <ol>
+        <li>ตัดท่อ PVC 2″ ตามความยาวที่ต้องการ (1.50 หรือ 2.00 ม.)</li>
+        <li>ตัดด้านบนออกประมาณ 35% ของเส้นรอบวง</li>
+        <li>ลบคมและดัดขอบปากรางเข้าด้านในเล็กน้อย</li>
+        <li>ตัดท่อ 4″ ยาว ~10 ซม. ปิดก้น เจาะรูข้าง เสียบปลายรางด้านที่ไม่ได้ตัดบนเข้าไป แล้วยาซีลให้แน่น</li>
+        <li>ขันวาล์วแบบ B เข้ากับข้อต่อเกลียวใน ½″ ให้ตัววาล์วตั้งอยู่ในถ้วย และปรับความสูงจนน้ำตัดที่ระดับลึก 3–4 ซม. ในราง</li>
+        <li>ต่อข้องอ 90° และท่อ ½″ ไปยังท่อน้ำจากภายนอก</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2><span class="no">04</span>การติดตั้งใช้งาน</h2>
+      <ul>
+        <li>ตั้งรางให้ได้ระดับ น้ำจะได้ลึกเท่ากันตลอดราง</li>
+        <li>ยึดรางด้วยขาตั้งหรือแคล้มป์ทุกระยะ 1–1.5 ม.</li>
+        <li>ควรมีรางน้ำอย่างน้อย 2 เส้นต่อไก่ 100 ตัว</li>
+        <li>ล้างรางสัปดาห์ละ 1–2 ครั้ง และตรวจวาล์วลูกลอยสม่ำเสมอ</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="no">05</span>ใช้กับแบบเล้า 4 ล็อก</h2>
+      <ul>
+        <li>ราง 4.80 ม. ทำจากท่อ 4.00 + 0.80 ต่อด้วยข้อต่อตรง 2″</li>
+        <li>วางนอกเล้า ห่างผนัง 0.15 ขอบรางสูงประมาณ 0.30 จากพื้น</li>
+        <li>วาล์วลูกลอยอยู่ในถ้วยพักน้ำปลายรางฝั่งท่อน้ำเข้า</li>
+      </ul>
+      <p class="note">คู่มือคิดราง 1 เส้นต่อไก่ 20–30 ตัว ราง 4.80 ม. เทียบได้ราว 2.5 เส้นของราง 2 ม. รองรับไก่ได้ประมาณ 60–70 ตัว ล็อกละ 100 ตัวจึงควรเพิ่มรางอีก 1 เส้นภายในล็อก หรือเพิ่มนิปเปิล</p>
+    </section>
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const HC=28.6;               // pipe centre height (cm) -> rim ~30 cm
+const RO=3.0, RI=2.75;       // outer / inner radius (cm)
+const CUT=63*Math.PI/180;    // half-angle of removed top (126°)
+const A0=Math.PI/2+CUT, A1=Math.PI/2-CUT+2*Math.PI;
+const SET=0.6;               // float shut-off level above centre (cm)
+const $=id=>document.getElementById(id);
+const stage=$('stage'), canvas=$('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(38,1,0.5,4000);
+function applyTheme(){const v=getComputedStyle(document.documentElement).getPropertyValue('--sky').trim()||'#DDE7EB';scene.background=new THREE.Color(v);}
+applyTheme();
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme)}catch(e){}
+new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x707060,0.75));
+const sun=new THREE.DirectionalLight(0xffffff,0.8);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+scene.add(sun);scene.add(sun.target);
+
+const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.6,metalness:0},o));
+const mPVC=M(0xD9DCDD,{roughness:.35}), mPVCin=M(0xC9CDCF,{roughness:.4}), mCap=M(0xB9BEC1,{roughness:.45});
+const mBlue=M(0x2F7FD0,{roughness:.35}), mDark=M(0x4A4F55,{roughness:.5}), mRed=M(0xC8302B,{roughness:.4});
+const mFloat=M(0xF4F4F0,{roughness:.3}), mGreen=M(0x3E7A55,{roughness:.6}), mBlack=M(0x1E1F22,{roughness:.5});
+const mWater=new THREE.MeshStandardMaterial({color:0x6FB6E8,transparent:true,opacity:.62,roughness:.08,metalness:.1});
+const mStream=new THREE.MeshStandardMaterial({color:0x8CC8F0,transparent:true,opacity:.7,roughness:.1});
+
+// floor
+const fl=new THREE.Mesh(new THREE.PlaneGeometry(4000,4000),M(0xB8AE95,{roughness:.95}));
+fl.rotation.x=-Math.PI/2;fl.receiveShadow=true;scene.add(fl);
+
+function sh(m){m.castShadow=true;m.receiveShadow=true;return m;}
+function arcShape(R,r){const s=new THREE.Shape();s.absarc(0,0,R,A0,A1,false);s.absarc(0,0,r,A1,A0,true);return s;}
+const UP=new THREE.Vector3(0,1,0);
+function rodTo(mesh,a,b){const d=new THREE.Vector3().subVectors(b,a);mesh.position.copy(a).add(b).multiplyScalar(.5);
+  mesh.scale.set(1,Math.max(d.length(),0.01),1);mesh.quaternion.setFromUnitVectors(UP,d.normalize());}
+
+let L=200, level=SET, explode=0, explodeT=0, cutView=false;
+let root=null, pipeG, cap0, capL, valveG, standsG, waterMesh=null, stream, lastLevel=null, cupX=0, cupWater, innerFloat, valveDims;
+const labelDefs=[];
+
+function build(){
+  if(root){scene.remove(root);root.traverse(o=>{if(o.geometry)o.geometry.dispose();});}
+  root=new THREE.Group();scene.add(root);waterMesh=null;lastLevel=null;labelDefs.length=0;
+  // trough (local z = along length)
+  pipeG=new THREE.Group();pipeG.position.set(0,HC,0);pipeG.rotation.y=Math.PI/2;root.add(pipeG);
+  const g=new THREE.ExtrudeGeometry(arcShape(RO,RI),{depth:L,bevelEnabled:false,curveSegments:40});
+  pipeG.add(sh(new THREE.Mesh(g,[mPVC,mPVCin])));
+  // curled lips
+  for(const a of[A0,A1]){const b=sh(new THREE.Mesh(new THREE.CylinderGeometry(.24,.24,L,10),mPVC));
+    b.geometry.rotateX(Math.PI/2);b.position.set(Math.cos(a)*(RO-0.12)-Math.sign(Math.cos(a))*0.12,Math.sin(a)*(RO-0.12),L/2);pipeG.add(b);}
+  // coupler for 4.80 m (4.00 + 0.80)
+  if(L>400){const cg=new THREE.ExtrudeGeometry(arcShape(RO+0.35,RO),{depth:6,bevelEnabled:false,curveSegments:40});
+    const cm=sh(new THREE.Mesh(cg,mCap));cm.position.z=397;pipeG.add(cm);
+    labelDefs.push({n:'',t:'ข้อต่อตรง 2″',p:()=>new THREE.Vector3(400,HC+2.2,-3.4)});}
+  // end caps: far end capped; valve end runs as a full-round sleeve into the 4" cup
+  const capG=new THREE.CylinderGeometry(3.25,3.25,1.2,40);capG.rotateX(Math.PI/2);
+  cap0=sh(new THREE.Mesh(capG,mCap));pipeG.add(cap0);
+  const sleeve=sh(new THREE.Mesh(new THREE.CylinderGeometry(RO,RO,5,32,1,true),mPVC));sleeve.rotation.z=Math.PI/2;sleeve.position.set(L-1,HC,0);root.add(sleeve);
+  capL=sleeve;
+
+  // 4" settling cup at the valve end (communicating with the trough)
+  const CX=L+1.4+5.7, CR=5.7, CB=HC-4.5, CT=HC+5;
+  cupX=CX;
+  const mCup=new THREE.MeshStandardMaterial({color:0xC9CED2,roughness:.4,transparent:true,opacity:.38,side:THREE.DoubleSide,depthWrite:false});
+  const cup=new THREE.Mesh(new THREE.CylinderGeometry(CR,CR,CT-CB,40,1,true),mCup);cup.position.set(CX,(CB+CT)/2,0);root.add(cup);
+  const rim=sh(new THREE.Mesh(new THREE.TorusGeometry(CR,0.25,8,40),mCap));rim.rotation.x=Math.PI/2;rim.position.set(CX,CT,0);root.add(rim);
+  const cupBot=sh(new THREE.Mesh(new THREE.CylinderGeometry(CR+0.3,CR+0.3,0.6,40),mCap));cupBot.position.set(CX,CB+0.3,0);root.add(cupBot);
+  const cupLeg=sh(new THREE.Mesh(new THREE.BoxGeometry(1.6,CB,1.6),mGreen));cupLeg.position.set(CX,CB/2,0);root.add(cupLeg);
+  const cupBase=sh(new THREE.Mesh(new THREE.BoxGeometry(12,0.8,12),mGreen));cupBase.position.set(CX,0.4,0);root.add(cupBase);
+  cupWater=new THREE.Mesh(new THREE.CylinderGeometry(CR-0.3,CR-0.3,1,40),mWater);root.add(cupWater);
+
+  // mini float valve, type B: inlet on top, outlet on the side (world coords)
+  valveG=new THREE.Group();root.add(valveG);
+  const vx=CX, VB=HC-3.9, VT=HC+SET+1.0;          // body bottom on cup floor, shut-off ~1 cm below the cap
+  const mVBody=new THREE.MeshStandardMaterial({color:0x3D8FE0,roughness:.25,transparent:true,opacity:.55,depthWrite:false});
+  const mWhite=M(0xF2F3F1,{roughness:.35});
+  const vb=new THREE.Mesh(new THREE.CylinderGeometry(2.5,2.4,VT-VB,32),mVBody);vb.position.set(vx,(VB+VT)/2,0);valveG.add(vb);
+  for(const a of[0,Math.PI/2,Math.PI,Math.PI*1.5]){const rib=new THREE.Mesh(new THREE.BoxGeometry(0.25,VT-VB-0.6,0.5),mVBody);
+    rib.position.set(vx+Math.cos(a)*2.45,(VB+VT)/2-0.3,Math.sin(a)*2.45);rib.rotation.y=-a;valveG.add(rib);}
+  const vcap=sh(new THREE.Mesh(new THREE.CylinderGeometry(2.65,2.65,1.2,32),mWhite));vcap.position.set(vx,VT+0.6,0);valveG.add(vcap);
+  const vnut=sh(new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.2,0.8,6),mWhite));vnut.position.set(vx,VT+1.6,0);valveG.add(vnut);
+  const vthr=sh(new THREE.Mesh(new THREE.CylinderGeometry(0.95,0.95,2.4,16),mWhite));vthr.position.set(vx,VT+3.2,0);valveG.add(vthr);
+  for(let i=0;i<5;i++){const t=sh(new THREE.Mesh(new THREE.TorusGeometry(0.97,0.08,6,16),mWhite));t.rotation.x=Math.PI/2;t.position.set(vx,VT+2.2+i*0.45,0);valveG.add(t);}
+  const vout=sh(new THREE.Mesh(new THREE.CylinderGeometry(0.85,0.85,2.4,16),mWhite));vout.rotation.z=Math.PI/2;vout.position.set(vx-3.7,VT-0.4,0);valveG.add(vout);
+  innerFloat=new THREE.Mesh(new THREE.CylinderGeometry(1.9,1.9,1.4,24),M(0xFFFFFF,{roughness:.5}));valveG.add(innerFloat);
+  valveDims={vx,VB,VT};
+  // riser, elbow, inlet run
+  const top=VT+4.4;
+  const sock0=sh(new THREE.Mesh(new THREE.CylinderGeometry(1.35,1.35,2.0,16),mDark));sock0.position.set(vx,top+0.6,0);valveG.add(sock0);
+  const rh=HC+14-(top+1.6);
+  const riser=sh(new THREE.Mesh(new THREE.CylinderGeometry(1.05,1.05,rh,16),mBlue));riser.position.set(vx,top+1.6+rh/2,0);valveG.add(riser);
+  const elG=new THREE.TorusGeometry(2,1.12,12,20,Math.PI/2);elG.rotateZ(Math.PI/2);
+  const elbow=sh(new THREE.Mesh(elG,mBlue));elbow.position.set(vx+2,HC+14,0);valveG.add(elbow);
+  const run=36;const hp=sh(new THREE.Mesh(new THREE.CylinderGeometry(1.05,1.05,run,16),mBlue));hp.rotation.z=Math.PI/2;hp.position.set(vx+2+run/2,HC+16,0);valveG.add(hp);
+  // clip + stake
+  const cx=vx+26;
+  const clipG=new THREE.TorusGeometry(1.35,0.32,8,20,Math.PI*1.6);clipG.rotateZ(-Math.PI*0.3);clipG.rotateY(Math.PI/2);
+  const clip=sh(new THREE.Mesh(clipG,mBlack));clip.position.set(cx,HC+16,0);valveG.add(clip);
+  const stake=sh(new THREE.Mesh(new THREE.BoxGeometry(1.4,HC+14.6,1.4),mGreen));stake.position.set(cx,(HC+14.6)/2,-1.7);
+  root.add(stake);
+  stream=new THREE.Mesh(new THREE.CylinderGeometry(.22,.3,1,10),mStream);valveG.add(stream);
+
+  // stands every <=120 cm
+  standsG=new THREE.Group();root.add(standsG);
+  const n=Math.ceil((L-30)/120)+1;
+  const cradleG=new THREE.TorusGeometry(RO+0.35,0.35,8,24,Math.PI);cradleG.rotateZ(Math.PI);cradleG.rotateY(Math.PI/2);
+  for(let i=0;i<n;i++){const x=15+i*(L-30)/(n-1);
+    const cr=sh(new THREE.Mesh(cradleG,mGreen));cr.position.set(x,HC,0);standsG.add(cr);
+    const ph=HC-RO-0.6;const post=sh(new THREE.Mesh(new THREE.BoxGeometry(1.6,ph,1.6),mGreen));post.position.set(x,ph/2,0);standsG.add(post);
+    const base=sh(new THREE.Mesh(new THREE.BoxGeometry(9,0.8,9),mGreen));base.position.set(x,0.4,0);standsG.add(base);
+    const brace=sh(new THREE.Mesh(new THREE.BoxGeometry(1.2,0.8,RO*2+1.4),mGreen));brace.position.set(x,HC-RO-0.9,0);standsG.add(brace);
+  }
+
+  labelDefs.push(
+    {n:'1',t:'ท่อ PVC 2″ ตัดบน 35%',p:()=>new THREE.Vector3(L*0.38,HC+1.8,-3.3)},
+    {n:'2',t:'วาล์วลูกลอยมินิ ½″ แบบ B',p:()=>new THREE.Vector3(vx,HC-1.5,2.6).add(valveG.position)},
+    {n:'3',t:'ข้อต่อเกลียวใน ½″',p:()=>new THREE.Vector3(vx,VT+5,1.4).add(valveG.position)},
+    {n:'4',t:'ข้องอ 90°',p:()=>new THREE.Vector3(vx+1.5,HC+16.4,0).add(valveG.position)},
+    {n:'5',t:'ท่อ ½″ น้ำเข้า',p:()=>new THREE.Vector3(vx+16,HC+17.2,0).add(valveG.position)},
+    {n:'6',t:'คลิปล็อก ½″',p:()=>new THREE.Vector3(cx,HC+17.8,0).add(valveG.position)},
+    {n:'8',t:'ถ้วยพักน้ำ PVC 4″',p:()=>new THREE.Vector3(CX+CR,HC-2,0)},
+    {n:'',t:'ลูกลอยในตัววาล์ว',p:()=>innerFloat.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(-2.5,0,2))},
+    {n:'',t:'ทางออกน้ำ',p:()=>new THREE.Vector3(vx-5,VT-0.4,0).add(valveG.position)},
+    {n:'',t:'ขาตั้ง @≤1.20',p:()=>new THREE.Vector3(15,HC*0.45,0).add(standsG.position)}
+  );
+  renderTags();
+
+  // shadow frustum
+  Object.assign(sun.shadow.camera,{left:-L*0.7-60,right:L*0.7+60,top:L*0.7+60,bottom:-L*0.7-60,near:1,far:2000});
+  sun.shadow.camera.updateProjectionMatrix();
+  sun.position.set(L/2+120,260,160);sun.target.position.set(L/2,0,0);
+  $('sNow').textContent=(L/100).toFixed(2)+' ม.';
+  applyExplode();
+}
+
+function waterArea(y){const r=RI;y=Math.max(-r,Math.min(r,y));return r*r*Math.acos(-y/r)+y*Math.sqrt(r*r-y*y);}
+function rebuildWater(){
+  if(waterMesh){pipeG.remove(waterMesh);waterMesh.geometry.dispose();waterMesh=null;}
+  const r=RI-0.03;if(level<=-r+0.05)return;
+  const y=Math.min(level,r*Math.sin(Math.PI/2-CUT)-0.05),a=Math.asin(y/r);
+  const s=new THREE.Shape();s.moveTo(-Math.sqrt(r*r-y*y),y);s.absarc(0,0,r,Math.PI-a,2*Math.PI+a,false);s.closePath();
+  waterMesh=new THREE.Mesh(new THREE.ExtrudeGeometry(s,{depth:L-1.4,bevelEnabled:false,curveSegments:32}),mWater);
+  waterMesh.position.z=0.7;pipeG.add(waterMesh);
+}
+
+function applyExplode(){
+  const e=explode;
+  cap0.position.z=-0.6-e*22;cap0.visible=!cutView;
+  valveG.position.set(0,e*20,0);standsG.position.y=-e*14;
+}
+
+function updateFloat(dt){
+  const open=level<SET-0.04;
+  if(open){level=Math.min(SET,level+dt*0.75);}
+  const {vx,VB,VT}=valveDims, wl=HC+level;
+  // internal float rides the water inside the valve body and seals the inlet at the top
+  innerFloat.position.set(vx,Math.min(VT-0.8,Math.max(VB+0.9,wl-0.2)),0);
+  const cb=HC-3.9, h=Math.max(0.01,wl-cb);cupWater.scale.y=h;cupWater.position.set(cupX,cb+h/2,0);cupWater.visible=wl>cb+0.05;
+  stream.visible=open;
+  if(open){rodTo(stream,new THREE.Vector3(vx-4.9,VT-0.5,0),new THREE.Vector3(vx-5.1,Math.max(wl,cb),0));
+    mStream.opacity=0.55+0.2*Math.sin(performance.now()/60);}
+  if(lastLevel===null||Math.abs(level-lastLevel)>0.01){rebuildWater();lastLevel=level;}
+  const pv=$('pValve');pv.className='pill '+(open?'open':'closed');
+  $('sValve').textContent=open?'วาล์วเปิด · กำลังเติมน้ำ':'วาล์วปิด · น้ำเต็มระดับ';
+  $('sDepth').textContent=Math.max(0,level+RI).toFixed(1);
+  $('sVol').textContent=(waterArea(level)*L/1000).toFixed(1);
+}
+
+// tags
+function renderTags(){const box=$('tags');box.textContent='';
+  for(const d of labelDefs){const el=document.createElement('div');el.className='tag';
+    if(d.n){const b=document.createElement('b');b.textContent=d.n;el.appendChild(b);}
+    const s=document.createElement('span');s.textContent=d.t;el.appendChild(s);
+    if(!d.n)el.classList.add('plain');box.appendChild(el);d.el=el;}}
+
+// camera
+const target=new THREE.Vector3();const view={theta:0.55,phi:1.12,r:200};
+function setView(k){
+  cutView=k==='cut';applyExplode();
+  if(k==='all'){target.set(L/2+18,HC,0);Object.assign(view,{theta:0.42,phi:1.1,r:L*1.08+50});}
+  if(k==='valve'){target.set(L+6,HC+4,0);Object.assign(view,{theta:0.85,phi:1.12,r:62});}
+  if(k==='cut'){target.set(0,HC,0);Object.assign(view,{theta:-1.25,phi:1.32,r:30});}
+  place();['vAll','vValve','vCut'].forEach(id=>$(id).setAttribute('aria-pressed',String(id==={all:'vAll',valve:'vValve',cut:'vCut'}[k])));
+}
+function place(){view.phi=Math.min(1.53,Math.max(0.08,view.phi));view.r=Math.min(900,Math.max(8,view.r));
+  camera.position.set(target.x+view.r*Math.sin(view.phi)*Math.sin(view.theta),target.y+view.r*Math.cos(view.phi),target.z+view.r*Math.sin(view.phi)*Math.cos(view.theta));
+  camera.lookAt(target);stage.classList.toggle('compact',view.r>140);}
+const pts=new Map();let pinch=0;
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});});
+canvas.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;const p=pts.get(e.pointerId);
+  if(pts.size===1){view.theta-=(e.clientX-p.x)*0.008;view.phi-=(e.clientY-p.y)*0.006;}
+  p.x=e.clientX;p.y=e.clientY;
+  if(pts.size===2){const [a,b]=[...pts.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch)view.r*=pinch/d;pinch=d;}
+  place();});
+const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=0;};
+canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);
+canvas.addEventListener('wheel',e=>{e.preventDefault();view.r*=Math.exp(e.deltaY*0.001);place();},{passive:false});
+
+// UI
+let curView='all';
+for(const [id,len] of [['len150',150],['len200',200],['len480',480]])
+  $(id).onclick=()=>{L=len;['len150','len200','len480'].forEach(i=>$(i).setAttribute('aria-pressed',String(i===id)));build();setView(curView);};
+for(const [id,k] of [['vAll','all'],['vValve','valve'],['vCut','cut']]) $(id).onclick=()=>{curView=k;setView(k);};
+$('tExplode').onclick=e=>{explodeT=explodeT?0:1;e.currentTarget.setAttribute('aria-pressed',String(!!explodeT));};
+$('bDrink').onclick=()=>{level=Math.max(-RI+0.1,level-1.3);};
+$('bEmpty').onclick=()=>{level=-RI;};
+const info=$('info'),ti=$('tInfo');
+if(matchMedia('(max-width:900px)').matches){info.hidden=true;ti.setAttribute('aria-pressed','false');}
+ti.onclick=()=>{info.hidden=!info.hidden;ti.setAttribute('aria-pressed',String(!info.hidden));};
+
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(stage);
+
+build();setView('all');resize();
+const v=new THREE.Vector3();let last=performance.now();
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function loop(now){
+  const dt=Math.min(0.05,(now-last)/1000);last=now;
+  if(Math.abs(explode-explodeT)>0.001){explode+= (explodeT-explode)*(reduce?1:Math.min(1,dt*6));applyExplode();}
+  updateFloat(dt);
+  renderer.render(scene,camera);
+  const w=stage.clientWidth,h=stage.clientHeight;
+  for(const d of labelDefs){if(!d.el)continue;v.copy(d.p()).project(camera);
+    const off=v.z>1||Math.abs(v.x)>0.98||Math.abs(v.y)>0.98;d.el.hidden=off||(cutView&&d.n!=='1');
+    if(!d.n)d.el.hidden=d.el.hidden||stage.classList.contains('compact');
+    d.el.style.transform=`translate(${(v.x+1)/2*w}px,${(1-v.y)/2*h}px) translate(-10px,-50%)`;}
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>

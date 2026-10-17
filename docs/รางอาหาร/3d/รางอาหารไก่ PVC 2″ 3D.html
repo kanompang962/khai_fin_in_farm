@@ -1,0 +1,320 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>รางอาหารไก่ PVC 2″ 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one-screen viewer — toolbar band, 3D stage with live stats, spec panel on the right */
+:root{
+  --bg:#EFF0EB; --panel:#FFFFFF; --ink:#1E2A36; --muted:#66717C; --rule:#D5DAD1;
+  --accent:#9A6A1E; --chip:#E6E7E0; --sky:#E3E6E2;
+  --f-disp:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#13171B; --panel:#1A2026; --ink:#E5E8EA; --muted:#8D979F; --rule:#2B343B;
+  --accent:#E0A94F; --chip:#232A31; --sky:#1C2228; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#13171B; --panel:#1A2026; --ink:#E5E8EA; --muted:#8D979F; --rule:#2B343B;
+  --accent:#E0A94F; --chip:#232A31; --sky:#1C2228; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:14px/1.55 var(--f-body);display:flex;flex-direction:column;overflow:hidden}
+[hidden]{display:none!important}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:10px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:var(--panel);border-bottom:1px solid var(--rule)}
+h1{font-family:var(--f-disp);font-weight:700;font-size:19px;margin:0;line-height:1.2}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.grp{display:flex;gap:2px;background:var(--chip);border-radius:7px;padding:2px;align-items:center}
+.grp .lab{font-size:11px;color:var(--muted);padding:0 6px 0 8px}
+button{font:500 13px var(--f-body);color:var(--ink);background:transparent;border:0;border-radius:5px;padding:5px 9px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.18);color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.main{flex:1;min-height:0;display:flex;position:relative}
+.stage{position:relative;flex:1;min-width:0;overflow:hidden}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+.tag{position:absolute;left:0;top:0;pointer-events:none;display:flex;align-items:center;gap:5px;font:600 12px var(--f-disp);color:var(--ink);white-space:nowrap}
+.tag b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font:600 11px var(--f-mono)}
+.tag span{background:var(--panel);border:1px solid var(--rule);border-radius:5px;padding:1px 6px}
+.stage.compact .tag span{display:none}
+.status{position:absolute;left:12px;top:12px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 24px)}
+.pill{background:var(--panel);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;font-size:12.5px;font-variant-numeric:tabular-nums}
+.hint{position:absolute;right:12px;bottom:10px;font-size:12px;color:var(--muted)}
+aside{width:370px;flex:none;overflow-y:auto;background:var(--panel);border-left:1px solid var(--rule);
+  padding-block:16px 32px;padding-left:18px;padding-right:max(18px,env(safe-area-inset-right,0px));display:grid;gap:20px;align-content:start}
+aside h2{font-family:var(--f-disp);font-weight:600;font-size:15px;margin:0 0 8px;display:flex;gap:8px;align-items:baseline}
+aside h2 .no{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+aside p{margin:0 0 6px}
+aside ol,aside ul{margin:0;padding-left:18px;display:grid;gap:4px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+td{padding:5px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td+td{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;padding-left:10px;white-space:nowrap}
+.parts{list-style:none;padding:0}
+.parts li{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start}
+.parts b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font:600 11px var(--f-mono);margin-top:1px}
+.parts small{display:block;color:var(--muted);font-size:12px}
+.note{font-size:12.5px;color:var(--muted);border-left:2px solid var(--accent);padding-left:10px;margin:8px 0 0}
+@media (max-width:640px){.tools{margin-left:0}.hint{display:none}}
+@media (max-width:900px){aside{position:absolute;inset:0;width:auto;border-left:0;z-index:5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+</style>
+
+<div class="bar">
+  <h1>รางอาหารไก่ PVC 2″</h1>
+  <div class="tools">
+    <div class="grp" role="group" aria-label="ความยาว"><span class="lab">ยาว</span>
+      <button id="l150" aria-pressed="false">1.50</button><button id="l200" aria-pressed="false">2.00</button><button id="l400" aria-pressed="true">4.00</button>
+    </div>
+    <div class="grp" role="group" aria-label="ความสูงขอบราง"><span class="lab">ขอบสูง</span>
+      <button id="h15" aria-pressed="false">15</button><button id="h20" aria-pressed="true">20</button><button id="h25" aria-pressed="false">25</button>
+    </div>
+    <div class="grp" role="group" aria-label="ระดับอาหาร"><span class="lab">อาหาร</span>
+      <button id="f13" aria-pressed="true">⅓</button><button id="f12" aria-pressed="false">½</button><button id="f23" aria-pressed="false">⅔</button>
+    </div>
+    <div class="grp" role="group" aria-label="มุมมอง">
+      <button id="vAll" aria-pressed="true">ทั้งราง</button><button id="vBase" aria-pressed="false">ฐาน</button><button id="vCut" aria-pressed="false">หน้าตัด</button>
+    </div>
+    <div class="grp">
+      <button id="tWire" aria-pressed="true">ลวดกันเกาะ</button>
+      <button id="tExplode" aria-pressed="false">แยกชิ้น</button>
+      <button id="tInfo" aria-pressed="true">รายละเอียด</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="stage" id="stage">
+    <canvas id="c" aria-label="โมเดล 3 มิติ รางอาหารไก่ PVC 2 นิ้ว พร้อมฐานตั้งพื้น"></canvas>
+    <div class="status">
+      <span class="pill">อาหารในราง <b id="sKg">–</b> กก.</span>
+      <span class="pill">กินพร้อมกัน ~<b id="sHens">–</b> ตัว</span>
+      <span class="pill">ฐาน <b id="sStands">–</b> ชุด</span>
+    </div>
+    <div id="tags"></div>
+    <div class="hint">ลากเพื่อหมุน · ล้อเมาส์/บีบนิ้วเพื่อซูม</div>
+  </div>
+
+  <aside id="info" aria-label="รายละเอียดรางอาหาร">
+    <section>
+      <h2><span class="no">01</span>ขนาด</h2>
+      <table>
+        <tr><td>ท่อ PVC เส้นผ่านศูนย์กลางนอก</td><td>60 มม. (2″)</td></tr>
+        <tr><td>ตัดด้านบนออก</td><td>~35% · 126°</td></tr>
+        <tr><td>ปากราง / ลึกถึงขอบ</td><td>5.4 / 4.0 ซม.</td></tr>
+        <tr><td>ความยาวมาตรฐานในเล้า</td><td>4.00 ม.</td></tr>
+        <tr><td>ฐานตั้งพื้น</td><td>@≤1.20 ม.</td></tr>
+        <tr><td>ความกว้างขาฐาน</td><td>36 ซม.</td></tr>
+        <tr><td>ขอบรางสูงจากพื้น</td><td id="sRim">20 ซม.</td></tr>
+        <tr><td>ที่กินต่อตัว</td><td>~12 ซม. (2 ข้าง)</td></tr>
+      </table>
+    </section>
+    <section>
+      <h2><span class="no">02</span>ชิ้นส่วน</h2>
+      <ul class="parts">
+        <li><b>1</b><div>ท่อ PVC 2″ ตัดบน 35%<small>ขอบโค้งเข้าด้านใน ลดการเขี่ยอาหารหก</small></div></li>
+        <li><b>2</b><div>ฝาปิด 2″<small>ปิดทั้ง 2 ปลาย</small></div></li>
+        <li><b>3</b><div>แคล้มป์รับราง<small>ท่อ 2½″ ยาว 6 ซม. ผ่าครึ่ง ยึดสกรูกับฝาครอบ</small></div></li>
+        <li><b>4</b><div>ฝาครอบ 1″<small>หัวเสาฐาน รับแคล้มป์</small></div></li>
+        <li><b>5</b><div>ท่อ PVC 1″ (เสา)<small>ตัดตามความสูงขอบรางที่ต้องการ</small></div></li>
+        <li><b>6</b><div>สามทาง 1″</div></li>
+        <li><b>7</b><div>ท่อ PVC 1″ (ขาฐาน)<small>2 ท่อน ท่อนละ 16 ซม. กว้างรวม ~36 ซม.</small></div></li>
+        <li><b>8</b><div>ฝาปิด 1″ ปลายขาฐาน</div></li>
+        <li><b>9</b><div>ลวดกันเกาะ + เสาลวด<small>ขึงสูงจากขอบราง 8 ซม. กันไก่ขึ้นยืนบนราง</small></div></li>
+      </ul>
+    </section>
+    <section>
+      <h2><span class="no">03</span>ขั้นตอนประกอบ</h2>
+      <ol>
+        <li>ตัดท่อ 2″ ด้านบนออก 35% ลบคม ดัดขอบเข้าเล็กน้อย ปิดฝาทั้ง 2 ปลาย</li>
+        <li>ตัดท่อ 2½″ ยาว 6 ซม. ผ่าครึ่งตามยาว ได้แคล้มป์ 2 ชิ้น</li>
+        <li>ยึดแคล้มป์กับฝาครอบ 1″ ด้วยสกรู 1 ตัว</li>
+        <li>ประกอบขาฐาน: ท่อ 1″ 16 ซม. + สามทาง + ท่อ 1″ 16 ซม. + ฝาปิด 2 ข้าง</li>
+        <li>เสียบเสา 1″ เข้าสามทาง สวมฝาครอบที่มีแคล้มป์ ไม่ต้องทากาวถ้าต้องการปรับสูงภายหลัง</li>
+        <li>วางรางบนแคล้มป์ ติดเสาลวดที่ฐานหัวท้าย ขึงลวดตึงเหนือราง</li>
+      </ol>
+    </section>
+    <section>
+      <h2><span class="no">04</span>การใช้งาน</h2>
+      <ul>
+        <li>ตั้งขอบรางให้อยู่ระดับหลังไก่ ไก่เล็ก 15 · สาว 20 · ไก่ไข่ 25 ซม.</li>
+        <li>เติมอาหารไม่เกิน ⅓ ของความลึก ลดการเขี่ยหก</li>
+        <li>เล้า 4 ล็อก: ล็อกละ 2 ราง × 4.00 ม. ไก่ 100 ตัวได้ที่กินราว 16 ซม./ตัว</li>
+        <li>ฐานขยับย้ายได้ ไม่ต้องฝังพื้น ล้างทำความสะอาดง่าย</li>
+      </ul>
+      <p class="note">ถ้าพื้นแกลบไม่เรียบ ให้กดฐานลงแกลบหรือรองด้วยแผ่นไม้ ให้รางได้ระดับตลอดความยาว</p>
+    </section>
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const RO=3.0, RI=2.75, CUT=63*Math.PI/180, A0=Math.PI/2+CUT, A1=Math.PI/2-CUT+2*Math.PI;
+const FEED_DENS=0.62; // kg per litre (layer mash/pellet)
+const $=id=>document.getElementById(id);
+const stage=$('stage'), canvas=$('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(38,1,0.5,4000);
+function applyTheme(){scene.background=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--sky').trim()||'#E3E6E2');}
+applyTheme();
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme)}catch(e){}
+new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+scene.add(new THREE.HemisphereLight(0xffffff,0x706a5a,0.75));
+const sun=new THREE.DirectionalLight(0xffffff,0.8);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);scene.add(sun);scene.add(sun.target);
+
+const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.6,metalness:0},o));
+function tex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);return t;}
+const feedTex=tex(128,128,(g,w,h)=>{g.fillStyle='#C9A25E';g.fillRect(0,0,w,h);
+  for(let i=0;i<1600;i++){const r=Math.random();g.fillStyle=r<.4?'#A97E3C':r<.7?'#E2C384':'#8C6A33';g.beginPath();g.arc(Math.random()*w,Math.random()*h,1+Math.random()*1.6,0,7);g.fill();}},[40,1]);
+const litterTex=tex(128,128,(g,w,h)=>{g.fillStyle='#D8C796';g.fillRect(0,0,w,h);for(let i=0;i<1500;i++){g.fillStyle=Math.random()<.5?'rgba(160,130,70,.5)':'rgba(240,226,180,.6)';g.fillRect(Math.random()*w,Math.random()*h,3,1);}},[60,60]);
+const mPVC=M(0xDADDDE,{roughness:.35}), mPVCin=M(0xC8CCCE,{roughness:.4}), mCap=M(0xB8BDC0,{roughness:.45});
+const mPVC1=M(0xEEEFEE,{roughness:.35}), mFit=M(0xD9DBD8,{roughness:.4}), mCl=M(0xC9CDD0,{roughness:.4});
+const mFeed=M(0xffffff,{map:feedTex,roughness:.95}), mWire=M(0x55595E,{metalness:.6,roughness:.35}), mScrew=M(0x6D7176,{metalness:.7,roughness:.3});
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(4000,4000),M(0xffffff,{map:litterTex,roughness:1}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+
+const sh=m=>{m.castShadow=true;m.receiveShadow=true;return m;};
+function arcShape(R,r,a0,a1){const s=new THREE.Shape();s.absarc(0,0,R,a0,a1,false);s.absarc(0,0,r,a1,a0,true);return s;}
+function cyl(r,h,mat,axis){const g=new THREE.CylinderGeometry(r,r,h,24);if(axis==='x')g.rotateZ(Math.PI/2);if(axis==='z')g.rotateX(Math.PI/2);return sh(new THREE.Mesh(g,mat));}
+
+let L=400, RIM=20, FILL=1/3, explode=0, explodeT=0, cutView=false, wireOn=true, curView='all';
+let root, pipeG, cap0, capL, standsG, wireG, feedMesh=null, HC=RIM-1.36, xs=[];
+const labelDefs=[];
+
+function feedLevel(){return -RI+FILL*(RI+RI*Math.sin(Math.PI/2-CUT));}
+function area(y){const r=RI;y=Math.max(-r,Math.min(r,y));return r*r*Math.acos(-y/r)+y*Math.sqrt(r*r-y*y);}
+function rebuildFeed(){
+  if(feedMesh){pipeG.remove(feedMesh);feedMesh.geometry.dispose();}
+  const r=RI-0.03,y=feedLevel(),a=Math.asin(y/r);
+  const s=new THREE.Shape();s.moveTo(-Math.sqrt(r*r-y*y),y);s.absarc(0,0,r,Math.PI-a,2*Math.PI+a,false);s.closePath();
+  feedMesh=new THREE.Mesh(new THREE.ExtrudeGeometry(s,{depth:L-0.2,bevelEnabled:false,curveSegments:32}),mFeed);
+  feedMesh.position.z=0.1;feedMesh.receiveShadow=true;pipeG.add(feedMesh);
+  $('sKg').textContent=(area(y)*L/1000*FEED_DENS).toFixed(1);
+}
+
+function build(){
+  if(root){scene.remove(root);root.traverse(o=>{if(o.geometry)o.geometry.dispose();});}
+  root=new THREE.Group();scene.add(root);feedMesh=null;labelDefs.length=0;
+  HC=RIM-1.36;
+  pipeG=new THREE.Group();pipeG.position.set(0,HC,0);pipeG.rotation.y=Math.PI/2;root.add(pipeG);
+  pipeG.add(sh(new THREE.Mesh(new THREE.ExtrudeGeometry(arcShape(RO,RI,A0,A1),{depth:L,bevelEnabled:false,curveSegments:40}),[mPVC,mPVCin])));
+  for(const a of[A0,A1]){const b=sh(new THREE.Mesh(new THREE.CylinderGeometry(.24,.24,L,10),mPVC));b.geometry.rotateX(Math.PI/2);
+    b.position.set(Math.cos(a)*(RO-0.12)-Math.sign(Math.cos(a))*0.12,Math.sin(a)*(RO-0.12),L/2);pipeG.add(b);}
+  const capG=new THREE.CylinderGeometry(3.25,3.25,1.2,40);capG.rotateX(Math.PI/2);
+  cap0=sh(new THREE.Mesh(capG,mCap));capL=sh(new THREE.Mesh(capG.clone(),mCap));pipeG.add(cap0,capL);
+  rebuildFeed();
+
+  // floor stands (all PVC 1")
+  standsG=new THREE.Group();root.add(standsG);
+  const n=Math.ceil((L-30)/120)+1;xs=[];for(let i=0;i<n;i++)xs.push(15+i*(L-30)/(n-1));
+  const FR=1.67, FY=FR;                    // 1" pipe OD 3.34
+  const cradleG=new THREE.ExtrudeGeometry(arcShape(3.6,3.05,Math.PI,2*Math.PI),{depth:6,bevelEnabled:false,curveSegments:28});
+  for(const x of xs){const g=new THREE.Group();g.position.x=x;standsG.add(g);
+    const foot=cyl(FR,32,mPVC1,'z');foot.position.set(0,FY,0);g.add(foot);
+    for(const s of[-1,1]){const c=cyl(1.95,2.2,mFit,'z');c.position.set(0,FY,s*17);g.add(c);
+      const d=sh(new THREE.Mesh(new THREE.CircleGeometry(1.95,24),mFit));d.position.set(0,FY,s*18.1);d.rotation.y=s>0?0:Math.PI;g.add(d);}
+    const teeA=cyl(1.95,6.4,mFit,'z');teeA.position.set(0,FY,0);g.add(teeA);
+    const teeB=cyl(1.95,3.2,mFit);teeB.position.set(0,FY+1.6+1.0,0);g.add(teeB);
+    const rb=FY+4.2, rt=HC-6.1;
+    const riser=cyl(FR,rt-rb+1,mPVC1);riser.position.set(0,(rb+rt)/2,0);g.add(riser);
+    const tcap=cyl(2.1,2.5,mFit);tcap.position.set(0,HC-4.85,0);g.add(tcap);
+    const cr=sh(new THREE.Mesh(cradleG,mCl));cr.rotation.y=Math.PI/2;cr.position.set(-3,HC,0);g.add(cr);
+    const sc=cyl(0.35,0.5,mScrew);sc.position.set(0,HC-3.3,0);g.add(sc);
+  }
+  // anti-roost wire on end stands
+  wireG=new THREE.Group();root.add(wireG);
+  const WY=RIM+8;
+  for(const x of[xs[0],xs[xs.length-1]]){
+    const v=cyl(0.22,WY-(HC-3.3),mWire);v.position.set(x,(WY+HC-3.3)/2,-3.9);wireG.add(v);
+    const h=cyl(0.22,3.9,mWire,'z');h.position.set(x,WY,-1.95);wireG.add(h);
+  }
+  const w=cyl(0.08,xs[xs.length-1]-xs[0],mWire,'x');w.position.set((xs[0]+xs[xs.length-1])/2,WY,0);wireG.add(w);
+  wireG.visible=wireOn;
+
+  const x0=xs[0];
+  labelDefs.push(
+    {n:'1',t:'ราง PVC 2″ ตัดบน 35%',p:()=>new THREE.Vector3(L*0.42,HC+1.8,-3.3).add(pipeOff())},
+    {n:'2',t:'ฝาปิด 2″',p:()=>new THREE.Vector3(-0.6-explode*18,HC+3.4,0).add(pipeOff())},
+    {n:'3',t:'แคล้มป์ 2½″ ผ่าครึ่ง',p:()=>new THREE.Vector3(x0,HC-3.4+explode*8,3.7)},
+    {n:'4',t:'ฝาครอบ 1″',p:()=>new THREE.Vector3(x0,HC-4.85+explode*5,2.2)},
+    {n:'5',t:'เสา ท่อ 1″',p:()=>new THREE.Vector3(x0,(FY+4.2+HC-6.1)/2+explode*2.5,1.8)},
+    {n:'6',t:'สามทาง 1″',p:()=>new THREE.Vector3(x0,FY+2,2.2).add(standsG.position)},
+    {n:'7',t:'ขาฐาน ท่อ 1″',p:()=>new THREE.Vector3(x0,FY+1.8,10).add(standsG.position)},
+    {n:'8',t:'ฝาปิด 1″',p:()=>new THREE.Vector3(x0,FY+2,18).add(standsG.position)},
+    {n:'9',t:'ลวดกันเกาะ',p:()=>new THREE.Vector3(L*0.6,WY+0.6,0).add(wireG.position)}
+  );
+  renderTags();
+  Object.assign(sun.shadow.camera,{left:-L*0.7-60,right:L*0.7+60,top:L*0.7+60,bottom:-L*0.7-60,near:1,far:2000});
+  sun.shadow.camera.updateProjectionMatrix();sun.position.set(L/2+120,260,160);sun.target.position.set(L/2,0,0);
+  $('sStands').textContent=n;$('sHens').textContent=Math.round(2*L/12);$('sRim').textContent=RIM+' ซม.';
+  applyExplode();
+}
+function pipeOff(){return new THREE.Vector3(0,pipeG.position.y-HC,0);}
+function applyExplode(){const e=explode;
+  pipeG.position.y=HC+e*12;cap0.position.z=-0.6-e*18;capL.position.z=L+0.6+e*18;cap0.visible=!cutView;
+  wireG.position.y=e*22;
+  standsG.children.forEach(g=>{const ch=g.children;
+    // ch: foot, cap, disc, cap, disc, teeA, teeB, riser, tcap, cradle, screw
+    ch[8].position.y=HC-4.85+e*5; ch[9].position.y=HC+e*8; ch[10].position.y=HC-3.3+e*8;
+    ch[7].position.y=(1.67+4.2+HC-6.1)/2+e*2.5;
+    ch[1].position.z=-17-e*5;ch[2].position.z=-18.1-e*5;ch[3].position.z=17+e*5;ch[4].position.z=18.1+e*5;});
+}
+
+function renderTags(){const box=$('tags');box.textContent='';
+  for(const d of labelDefs){const el=document.createElement('div');el.className='tag';
+    const b=document.createElement('b');b.textContent=d.n;el.appendChild(b);
+    const s=document.createElement('span');s.textContent=d.t;el.appendChild(s);box.appendChild(el);d.el=el;}}
+
+const target=new THREE.Vector3();const view={theta:0.5,phi:1.1,r:300};
+function setView(k){curView=k;cutView=k==='cut';applyExplode();
+  if(k==='all'){target.set(L/2,HC*0.6,0);Object.assign(view,{theta:0.32,phi:1.05,r:L*1.3+60});}
+  if(k==='base'){target.set(xs[0],HC*0.55,0);Object.assign(view,{theta:0.95,phi:1.18,r:RIM*2.2+38});}
+  if(k==='cut'){target.set(0,HC-2,0);Object.assign(view,{theta:-1.3,phi:1.3,r:RIM*1.6+30});}
+  place();for(const [id,v] of [['vAll','all'],['vBase','base'],['vCut','cut']])$(id).setAttribute('aria-pressed',String(v===k));}
+function place(){view.phi=Math.min(1.53,Math.max(0.08,view.phi));view.r=Math.min(900,Math.max(8,view.r));
+  camera.position.set(target.x+view.r*Math.sin(view.phi)*Math.sin(view.theta),target.y+view.r*Math.cos(view.phi),target.z+view.r*Math.sin(view.phi)*Math.cos(view.theta));
+  camera.lookAt(target);stage.classList.toggle('compact',view.r>150);}
+const pts=new Map();let pinch=0;
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});});
+canvas.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;const p=pts.get(e.pointerId);
+  if(pts.size===1){view.theta-=(e.clientX-p.x)*0.008;view.phi-=(e.clientY-p.y)*0.006;}
+  p.x=e.clientX;p.y=e.clientY;
+  if(pts.size===2){const [a,b]=[...pts.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch)view.r*=pinch/d;pinch=d;}
+  place();});
+const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=0;};
+canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);
+canvas.addEventListener('wheel',e=>{e.preventDefault();view.r*=Math.exp(e.deltaY*0.001);place();},{passive:false});
+
+const press=(ids,on)=>ids.forEach(i=>$(i).setAttribute('aria-pressed',String(i===on)));
+for(const [id,v] of [['l150',150],['l200',200],['l400',400]])$(id).onclick=()=>{L=v;press(['l150','l200','l400'],id);build();setView(curView);};
+for(const [id,v] of [['h15',15],['h20',20],['h25',25]])$(id).onclick=()=>{RIM=v;press(['h15','h20','h25'],id);build();setView(curView);};
+for(const [id,v] of [['f13',1/3],['f12',1/2],['f23',2/3]])$(id).onclick=()=>{FILL=v;press(['f13','f12','f23'],id);rebuildFeed();};
+for(const [id,k] of [['vAll','all'],['vBase','base'],['vCut','cut']])$(id).onclick=()=>setView(k);
+$('tWire').onclick=e=>{wireOn=!wireOn;wireG.visible=wireOn;e.currentTarget.setAttribute('aria-pressed',String(wireOn));};
+$('tExplode').onclick=e=>{explodeT=explodeT?0:1;e.currentTarget.setAttribute('aria-pressed',String(!!explodeT));};
+const info=$('info'),ti=$('tInfo');
+if(matchMedia('(max-width:900px)').matches){info.hidden=true;ti.setAttribute('aria-pressed','false');}
+ti.onclick=()=>{info.hidden=!info.hidden;ti.setAttribute('aria-pressed',String(!info.hidden));};
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(stage);
+
+build();setView('all');resize();
+const v=new THREE.Vector3();let last=performance.now();
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function loop(now){const dt=Math.min(0.05,(now-last)/1000);last=now;
+  if(Math.abs(explode-explodeT)>0.001){explode+=(explodeT-explode)*(reduce?1:Math.min(1,dt*6));applyExplode();}
+  renderer.render(scene,camera);
+  const w=stage.clientWidth,h=stage.clientHeight;
+  for(const d of labelDefs){v.copy(d.p()).project(camera);
+    d.el.hidden=v.z>1||Math.abs(v.x)>0.98||Math.abs(v.y)>0.98||(cutView&&d.n!=='1')||(d.n==='9'&&!wireOn);
+    d.el.style.transform=`translate(${(v.x+1)/2*w}px,${(1-v.y)/2*h}px) translate(-10px,-50%)`;}
+  requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>
